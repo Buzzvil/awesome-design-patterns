@@ -1,5 +1,4 @@
-# Iterator 
-Iterator 다
+# Sample pattern
 
 ...
 
