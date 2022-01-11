@@ -1,11 +1,6 @@
 # Iterator 
-Iterator 다
+**Iterator** 는 List, Stack 과 같은 Collection 의 내제된 특징을 노출하지 않은 채로 각각 요소를 순회할 수 있는 Design Pattern 이다.
 
-...
-
-## TL;DR
-
-...
 
 ## Problem
 
