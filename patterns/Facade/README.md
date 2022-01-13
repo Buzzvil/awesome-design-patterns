@@ -41,7 +41,7 @@
 
 ## Structure
 
-...
+![image](https://www.plantuml.com/plantuml/png/SoWkIImgAStDuKhEIImkLd3EoKpDA-7YuYf8JCvEJ4zL22vDAguiBadDLQZcub9GyCmhIIrAIqnELN1BJ4vCIGKAwK7qAEZgsi45eGomc7D-Nd9HQacgCyW2HpnoJdZadBbgkHnIyrA0BWK0)
 
 ## Pseudocode
 

@@ -1,0 +1,10 @@
+@startuml
+class Client
+package Subsystem {
+  Interface Facade
+  .Client --> Facade
+  Facade --> ConcreteClassA
+  Facade --> ConcreteClassB
+  Facade --> ConcreteClassC
+}
+@enduml
