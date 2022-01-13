@@ -45,7 +45,28 @@
 
 ## Pseudocode
 
-...
+```
+class Client:
+    function main:
+        Facade facade = new Facade();
+        ret = facade.doSomething(...);
+        ...
+        
+
+class Facade:
+    public function doSomething(...):
+        ConcreteClassA().DoThis(...);
+        ConcreteClassB().DoThat(...);
+        ...
+
+class ConcreteClassA:
+    public function DoThis(...):
+        ...
+
+class ConcreteClassB:
+    public function DoThat(...):
+        ...
+```
 
 ## Pros & Cons
 
