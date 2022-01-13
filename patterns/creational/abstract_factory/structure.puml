@@ -1,0 +1,46 @@
+@startuml
+interface AbstractFactory {
+    A createA()
+    B createB()
+}
+
+class SomeFactory {
+    A createA()
+    B createB()
+}
+SomeFactory .u.> AbstractFactory
+note right of SomeFactory::createA
+  returns SomeA
+end note
+note right of SomeFactory::createB
+  returns SomeB
+end note
+
+
+class OtherFactory {
+    A createA()
+    B createB()
+}
+OtherFactory .u.> AbstractFactory
+note right of OtherFactory::createA
+  returns OtherA
+end note
+note right of OtherFactory::createB
+  returns OtherB
+end note
+
+interface B
+class SomeB
+class OtherB
+
+SomeB .u.> B
+OtherB .u.> B
+
+interface A
+class SomeA
+class OtherA
+
+SomeA .u.> A
+OtherA .u.> A
+
+@enduml
