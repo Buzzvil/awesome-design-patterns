@@ -1,6 +1,6 @@
 // Parallel traverse
 
-val list = List(3, 1, 2)
+val list = List(1, 2, 3)
 val iterator1 = list.iterator
 val iterator2 = list.iterator
 
