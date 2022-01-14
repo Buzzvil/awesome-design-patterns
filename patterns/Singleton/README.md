@@ -51,4 +51,7 @@ Singoeton::Singleton (args)  {
 ## Examples
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-* [basic](/examples/python/sample-pattern-basic.py)
+* [singleton](/examples/Singleton/python/singleton.py)
+
+![Kotlin](https://img.shields.io/badge/Kotlin-0095D5?&style=for-the-badge&logo=kotlin&logoColor=white)
+* [singleton](/examples/Singleton/kotlin/singleton.kt)
