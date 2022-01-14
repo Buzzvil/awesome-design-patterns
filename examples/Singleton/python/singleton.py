@@ -1,18 +1,25 @@
-class Coin:
+class SingletonInstance:
     __instance = None
-    __coin = 0
 
     @classmethod
-    def __new__(cls, *args):
-      if cls.__instance is None:
-        cls.__instance = object.__new__(cls, *args)
+    def __getInstance(cls):
+      return cls.__instance
+    
+    @classmethod
+    def instance(cls, *args, **kwargs):
+      cls.__instance = cls(*args, **kwargs)
+      cls.instance = cls.__getInstance
       return cls.__instance
 
-    def get_coin(self):
-      return self.__coin
+class Coin(SingletonInstance):
+  def __init__(self):
+    self.__coin = 0
 
-    def add_coin(self):
-      self.__coin += 10
+  def add_coin(self):
+    self.__coin += 10
 
-    def deduct_coin(self):
-      self.__coin -= 1
+  def deduct_coin(self):
+    self.__coin -= 1
+
+  def get_coin(self):
+    return self.__coin
