@@ -45,11 +45,15 @@ Iterator 객체는 현재 위치 및 끝까지 남은 element 수와 같은 모�
 ## Examples
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-* [Basic Iterator example](./examples/python/sample-iterator.py)
-* [Looping through an Iterator example](./examples/python/looping_through_an_iterator.py)
+* [Basic Iterator](./examples/python/sample-iterator.py)
+* [Looping through an Iterator](./examples/python/looping_through_an_iterator.py)
 
 ![Scala](https://img.shields.io/badge/scala-%23DC322F.svg?style=for-the-badge&logo=scala&logoColor=white)
-* [Basic Iterator example](./examples/scala/simple.scala)
+* [Basic Iterator](./examples/scala/simple.scala)
+* [Single Responsible Principle](./examples/scala/SingleResponsiblePrinciple.scala)
+* [Open/Closed Principle](./examples/scala/OpenClosedPrinciple.scala)
+* [Parallel traverse](./examples/scala/ParallelTraverse.scala)
+* [LazyIterate](./examples/scala/LazyIterate.scala)
 
 
 ## Reference
