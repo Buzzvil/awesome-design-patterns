@@ -34,12 +34,12 @@ Iterator 객체는 현재 위치 및 끝까지 남은 element 수와 같은 모�
 
 ## Pros & Cons
 ### Pros
-* *단일 책임 원칙* 
+* *단일 책임 원칙*: 순회 알고리즘을 독립된 클래스로 분리하여 collection 과 client 코드를 간결하게 유지할 수 있다. 
 * *Open/Closed 원칙*
 * 각각 iterator 객체마다 고유의 iteration 상태를 갖기 때문에, 같은 collection 을 동시에 병렬로 순회가 가능하다.
 * iteration 동작을 미룰 수도 있고 언제든지 필요할 때 재개할 수 있다.
 ### Cons
-* 간단한 collection 들을 사용할 경우 굳이 iterator pattern 적용이 과잉노력이 될 수 있다.
+* 간단한 collection 들만 사용할 경우 굳이 iterator pattern 을 적용하는 것이 과할 수 있다.
 * 특정 collection의 경우 iterator 순회 방식이 비효율적일 수 있다.
 
 ## Examples
