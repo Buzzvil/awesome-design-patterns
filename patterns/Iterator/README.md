@@ -48,6 +48,9 @@ Iterator 객체는 현재 위치 및 끝까지 남은 element 수와 같은 모�
 * [Basic Iterator example](./examples/python/sample-iterator.py)
 * [Looping through an Iterator example](./examples/python/looping_through_an_iterator.py)
 
+![Scala](https://img.shields.io/badge/scala-%23DC322F.svg?style=for-the-badge&logo=scala&logoColor=white)
+* [Basic Iterator example](./examples/scala/simple.scala)
+
 
 ## Reference
 [Refactoring.guru](https://refactoring.guru/design-patterns/iterator)
