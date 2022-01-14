@@ -45,7 +45,8 @@ Iterator 객체는 현재 위치 및 끝까지 남은 element 수와 같은 모�
 ## Examples
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-* [basic](/examples/python/sample-pattern-basic.py)
+* [Basic Iterator example](./examples/python/sample-iterator.py)
+* [Looping through an Iterator example](./examples/python/looping_through_an_iterator.py)
 
 
 ## Reference
