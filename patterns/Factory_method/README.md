@@ -6,8 +6,7 @@
 객체를 생성하는 인터페이스는 미리 정의하고, 어떤 클래스의 인스턴스를 만들지는 서브 클래스에서 정한다.
 
 ## Problem
-다양한 종류의 문서를 표현할 수 있는 응용프로그램 프레임워크가 있다고 가정해 보자.
-이를 위해서 두 개의 큰 추상화를 가정해 보자. Application과 Document.
+다양한 종류의 문서를 표현하기 위하여 Application과 Document이라는 인터페이스를 가지는  있는 응용 프로그램 프레임워크가 있다고 가정해 보자.
 Application은 Document를 생성하고 수정하고 관리할 것이다.
 이 프로그램을 이용해서 그리기 관련 응용프로그램을 생성한다 하면, DrawApplication과 DrawingDocument를 생성하게 될 것이다.
 이렇게 Document의 서브 클래스는 다양하게 만들어질 것이고, Application은 Document의 어떤 서브 클래스의 인스턴스를 만들어야 하는지 미리 알 수가 없다.
