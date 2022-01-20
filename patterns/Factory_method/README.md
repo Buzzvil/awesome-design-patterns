@@ -38,6 +38,5 @@ Creator의 주된 책임은 Product를 만드는 것이 아닌, Product에 관�
 ## Examples
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-* [example_1](/examples/Factory_method/factory_method_example_1.py)
-* [example_2](/examples/Factory_method/factory_method_example_1.py)
+* [example_1](/examples/Factory_method/sample.py)]
 
