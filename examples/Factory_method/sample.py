@@ -36,7 +36,7 @@ class Warrior(GameClass):
         self.mp += 5
 
     def fight(self) -> None:
-        print('Attack with sword!')
+        print('Brandish a sword!')
 
 
 class Mage(GameClass):
