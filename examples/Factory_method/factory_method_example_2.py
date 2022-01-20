@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from abc import ABCMeta, abstractmethod
-from examples.Factory_method.factory_method_example_1 import GameClass, Mage, Warrior
+from abc import ABC, abstractmethod
+
+from factory_method_example_1 import GameClass, Mage, Warrior
 
 
 class Archer(GameClass):
@@ -18,9 +19,9 @@ class Archer(GameClass):
         super(Archer, self).print_status()
 
 
-class BaseGameClassFactory(metaclass=ABCMeta):
+class BaseGameClassFactory(ABC):
     @abstractmethod
-    def create_class(self, class_name):
+    def create_class(self, class_name) -> GameClass:
         pass
 
     def make_game(self):
@@ -31,7 +32,7 @@ class BaseGameClassFactory(metaclass=ABCMeta):
 
 
 class GameClassFactory(BaseGameClassFactory):
-    def create_class(self, class_name):
+    def create_class(self, class_name) -> GameClass:
         if class_name == 'mage':
             return Mage()
         elif class_name == 'archer':

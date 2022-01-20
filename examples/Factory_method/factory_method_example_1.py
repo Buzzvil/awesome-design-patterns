@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from abc import ABCMeta, abstractmethod
+from abc import ABC, abstractmethod
 
 
-class GameClass(metaclass=ABCMeta):
+class GameClass(ABC):
     def __init__(self):
         self.hp = 10
         self.mp = 10
@@ -43,19 +43,19 @@ class Mage(GameClass):
         super(Mage, self).print_status()
 
 
-class GameClassFactory(metaclass=ABCMeta):
+class GameClassFactory(ABC):
     @abstractmethod
-    def create_class(self):
+    def create_class(self) -> GameClass:
         pass
 
 
-class WarriorFactory(metaclass=ABCMeta):
-    def create_class(self):
+class WarriorFactory(GameClassFactory):
+    def create_class(self) -> GameClass:
         return Warrior()
 
 
-class MageFactory(metaclass=ABCMeta):
-    def create_class(self):
+class MageFactory(GameClassFactory):
+    def create_class(self) -> GameClass:
         return Mage()
 
 
