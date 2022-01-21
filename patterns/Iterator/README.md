@@ -42,11 +42,11 @@ Iterator 객체는 현재 위치 및 끝까지 남은 element 수와 같은 모�
 * [Looping through an Iterator](./examples/python/looping_through_an_iterator.py)
 
 ![Scala](https://img.shields.io/badge/scala-%23DC322F.svg?style=for-the-badge&logo=scala&logoColor=white)
-* [Basic Iterator](./examples/scala/simple.scala)
-* [Single Responsible Principle](./examples/scala/SingleResponsiblePrinciple.scala)
-* [Open/Closed Principle](./examples/scala/OpenClosedPrinciple.scala)
-* [Parallel traverse](./examples/scala/ParallelTraverse.scala)
-* [LazyIterate](./examples/scala/LazyIterate.scala)
+* [Basic Iterator](Development/awesome-design-patterns/patterns/Iterator/examples/scala/source/simple.scala)
+* [Single Responsible Principle](Development/awesome-design-patterns/patterns/Iterator/examples/scala/source/SingleResponsiblePrinciple.scala)
+* [Open/Closed Principle](Development/awesome-design-patterns/patterns/Iterator/examples/scala/source/OpenClosedPrinciple.scala)
+* [Parallel traverse](Development/awesome-design-patterns/patterns/Iterator/examples/scala/source/ParallelTraverse.scala)
+* [LazyIterate](Development/awesome-design-patterns/patterns/Iterator/examples/scala/source/LazyIterate.scala)
 
 
 ## Reference
