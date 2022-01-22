@@ -2,11 +2,13 @@
 
 ## TL;DR
 
-생성자가 여러 번 호출이 되어도 실제 생성되는 객체는 하나이고 최초 생성 이후에는 호출이 된 생성자는 최초의 생성자가 만든 객체를 리턴하는 방법. 즉, 전체 시스템 통틀어서 싱글톤 객체는 유일하며, 전역변수처럼 취급이 될 수 있다.
+Singleton은 앱이 실행되는 동안에 한 클래스가 유일한 인스턴스를 가진다는 것을 보장하고, 이 인스턴스에 전역 접근을 허용하는 디자인 패턴입니다.
 
 ## Problem
 
-로그를 기록하는 클래스를 정의했다고 가정하자. 각 레이어에서 이 클래스를 이용하여 같은 역할을 하는 객체를 생성한다면, 같은 기능을 하는 중복된 객체가 생성이 되므로 효율이 좋지 않다. 또한 코드 재활용이라는 기준으로 볼 때 적합하지 않다.
+Singleton 패턴은 단일 책임 원칙(Single Responsibility Principle, a.k.a SRP)을 위반함으로써 두 개의 문제를 해결합니다.
+1. 클래스는 유일한 인스턴스를 가집니다. 
+2. 이 인스턴스에 대하여 전역 접근을 허용합니다.
 
 ## Solution
 
@@ -27,26 +29,45 @@
 ## Pseudocode
 
 ```
-class Singleton {
-	void * __instance = null
+class Log is
+    private static instance: Log
+
+    private constructor Log() is
+    // initialize Log instance
+    public static method getInstance() is
+        if (Log.instance == null) then
+            acquireThreadLock()
+            if (Log.instance == null) then
+                Log.instance = new Log()
+        return Log.instance
+
+    // Any singleton should define some business logic
+    // which can be executed on its instance.
+    public method info(str) is
+        // record
 }
 
-Singoeton::Singleton (args)  {
-	if __instance {
-		return __instance
-	} else {
-		__instance = new Singleton(args)
-		return __instance
-	}	
-}
+class Application is 
+    method main() is 
+        Log foo = Log.getInstance()
+        foo.info("Hello World!")
+        ...
+        Log bar = Log.getInstance()
+        bar.info("Hello World!")
+        // foo is the same object as bar 
 ```
 
-## Anti-pattern
+## Pros and Cons
 
-- 크게 의미가 없는 상황에서 불필요한 제한을 두어서 전역 변수로 사용하는 경우에 위험하다.
-- 어디서든 접근이 가능하다는 것은, 개발자가 내부 작동 원리를 정확하게 알아야만 한다.
-- **단일 책임 원칙을 위반한다.**
-- 테스트가 어렵다.
++ 단일 인스턴스를 사용한다는 것을 보장합니다.
++ 해당 인스턴스에 대해서 전역 접근 포인트가 생깁니다.
++ 처음 선언될 때 초기화되고, 이후에는 변하지 않습니다.
+- **단일 책임 원칙을 위반합니다.**
+- 프로그램의 각 컴포넌트가 너무 많이 알게 되면, Singleton 패턴은 잘못된 디자인을 숨길 수 있습니다.
+- 멀티쓰레드 환경에서 별도 처리를 하지 않으면 각 쓰레드 별로 Singleton 객체를 만들 위험이 있습니다.
+- 클라이언트 측면에서 볼 때 유닛 테스트가 어렵습니다. 대부분의 테스트 프레임워크는 mocking 객체를 만들 때 상속에 의존하게 됩니다. 
+  Singleton 클래스의 생성자가 private이고 정적 메서드를 overriding하는 것이 대부분의 언어에서 허용하지 않기 때문에,
+  이 패턴을 mocking하기가 어렵습니다. 보통 이러한 경우에 테스트 코드를 작성하지 않거나 이 패턴을 포기하게 됩니다.
 
 ## Examples
 
