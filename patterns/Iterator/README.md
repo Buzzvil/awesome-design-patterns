@@ -38,7 +38,7 @@ Iterator 객체는 현재 위치 및 끝까지 남은 element 수와 같은 모�
 ## Examples
 
 ![Scala](https://img.shields.io/badge/scala-%23DC322F.svg?style=for-the-badge&logo=scala&logoColor=white)
-* [Basic Iterator](./examples/scala/src/main/scala/CustomIterator.scala), [Test](./examples/scala/test/main/scala/CustomIteratorSpec.scala)
+* [Basic Iterator trait](./examples/scala/src/main/scala/CustomIterator.scala), [Basic Iterator Spec](./examples/scala/src/test/scala/CustomIteratorSpec.scala)
 
 
 ## Reference
