@@ -1,4 +1,4 @@
 trait CustomIterator[T] {
   def hasNext(): Boolean
-  def next(): T
+  def next(): Option[T]
 }
