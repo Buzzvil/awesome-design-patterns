@@ -17,12 +17,12 @@ class Subject(ABC):
         pass
 
     @abstractmethod
-    def get_state(self) -> int:
+    def get_state(self) -> str:
         pass
 
 
-class SomeSubject(Subject):
-    state: int = None
+class PhoneStore(Subject):
+    state: str = None
     _observers: List[Observer] = []
 
     def attach(self, observer: Observer) -> None:
@@ -35,44 +35,32 @@ class SomeSubject(Subject):
         for observer in self._observers:
             observer.update(self)
 
-    def update_state(self, new_state: int) -> None:
+    def update_state(self, new_state: str) -> None:
         self.state = new_state
         self.notify()
 
-    def get_state(self) -> int:
+    def get_state(self) -> str:
         return self.state
 
 
+NOT_OBSERVED = ''
+
+
 class Observer(ABC):
+    last_notified_state: str = NOT_OBSERVED
+
     @abstractmethod
     def update(self, subject: Subject) -> None:
         pass
 
 
-class SomeObserverA(Observer):
+class IPhoneObserver(Observer):
     def update(self, subject: Subject) -> None:
-        if subject.get_state() < 3:
-            print(f"SomeObserverA: Reacted to the event, state={subject.get_state()}")
+        if "IPhone" in subject.get_state():
+            self.last_notified_state = subject.get_state()
 
 
-class SomeObserverB(Observer):
+class GalaxyObserver(Observer):
     def update(self, subject: Subject) -> None:
-        if subject.get_state() >= 2:
-            print(f"SomeObserverB: Reacted to the event, state={subject.get_state()}")
-
-
-if __name__ == "__main__":
-    subject = SomeSubject()
-
-    observer_a = SomeObserverA()
-    subject.attach(observer_a)
-
-    observer_b = SomeObserverB()
-    subject.attach(observer_b)
-
-    subject.update_state(1)
-    subject.update_state(2)
-
-    subject.detach(observer_a)
-
-    subject.update_state(3)
+        if "Galaxy" in subject.get_state():
+            self.last_notified_state = subject.get_state()
