@@ -14,15 +14,27 @@
 2. 생성자의 파라미터의 순서를 헷갈려서 잘못 넣는 경우 의도하지 않은 개체가 만들어 질 수 있다.
 예를 들면 `사람(이름, 나이, 키)`를 받아야 하는데 `사람("Gildong", 175, 25)` 이런 식으로 175살에 25cm인 사람이 만들어질 수 있다.
 
+이런 문제를 해결하기 위해 많은 언어에서 named parameter를 지원한다. 예시: `사람(name = "Gildong", age = 25, height = 175)`
+
 ## Solution
 
 빌더 패턴에서는 개체 생성과 관련된 클래스를 별도로 분리하여, 개체를 생성하는 방법이 복잡한 경우(Optional한 속성이 많을 때)에도 동일한 방식으로 생성할 수 있도록 한다.
 
 ## Structure
 
+출처: https://en.wikipedia.org/wiki/Builder_pattern
+
+### UML class and sequence diagram
+
+![](https://upload.wikimedia.org/wikipedia/commons/8/87/W3sDesign_Builder_Design_Pattern_UML.jpg)
+
+### Class diagram
+
 ![](https://imgur.com/g8AsAjc.jpg)
 
 ## Pseudocode
+
+(수도 코드는 아니고 그냥 샘플)
 
 ```java
 // 출처: https://ko.wikipedia.org/wiki/%EB%B9%8C%EB%8D%94_%ED%8C%A8%ED%84%B4
@@ -141,6 +153,20 @@ public class BuilderExample {
 
 출처: https://mangkyu.tistory.com/163 (각 항목에 대한 구체적인 예시가 있어서 참고하면 좋음)
 
+#### 가독성과 불편성 관련 추가 설명
+
+매개변수가 없는 생성자로 개체를 만든 후, setter를 호출하여 원하는 멤버변수를 초기화하는 패턴을 `JavaBeans` 패턴이라고 한다.
+
+```java
+Person man = new Person();
+man.setName("Gildong");
+man.setAge(25);
+man.setHeight(175);
+```
+
+하지만 이 경우 개체가 생성된 이후에 값을 수정할 수 있다보니 개체의 일관성(불변성)을 보장하기 어렵다.
+빌더 패턴의 경우 자바빈스 패턴의 가독성을 유지하면서도, 생성만을 위해 불필요한 setter를 열어둘 필요가 없어 일단 개체가 생성된 이후에는 일관성(불변성)이 보장된다.
+
 ### Cons
 
 - 정적 분석 불가능
@@ -149,6 +175,7 @@ public class BuilderExample {
 - 더 많은 코드의 작성이 필요
   - 생성자의 파라미터가 2-3개 정도로 작은 규모인 경우 굳이 빌더 패턴을 사용하지 말고 그냥 생성자를 2~3개 만들자
 - DTO를 매핑해야 하는 경우 빌더 패턴이랑 그닥 잘 매칭되지 않음
+- (개인적인 의견) named parameter를 사용하면 대부분의 경우에는 빌더 패턴까지 쓰지 않아도 될 것 같다.
 
 ## Examples
 
