@@ -1,4 +1,4 @@
 trait Product {
-  def getPrice: Float
-  def getName: String
+  def price: Float
+  def name: String
 }

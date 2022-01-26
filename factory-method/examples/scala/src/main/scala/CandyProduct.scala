@@ -1,4 +1,4 @@
 class CandyProduct extends Product{
-  override def getName: String = "candy"
-  override def getPrice: Float = 500
+  override def name: String = "candy"
+  override def price: Float = 500
 }
