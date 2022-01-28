@@ -35,5 +35,5 @@
 
 ## Examples
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-* [example-1](/factory-method/examples/python/example-1.py)
-* [example-2](/factory-method/examples/python/example-2.py)
+* [example-1](/patterns/factory-methodry-method/examples/python/example-1.py)
+* [example-2](/patterns/factory-methodry-method/examples/python/example-2.py)
