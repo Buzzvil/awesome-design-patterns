@@ -1,6 +1,7 @@
-package main
+package facade
 
 const StateOn = "ON"
+const StateOff = "OFF"
 
 type Light struct {
 	state string
