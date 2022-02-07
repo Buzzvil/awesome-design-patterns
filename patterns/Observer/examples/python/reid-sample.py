@@ -42,7 +42,7 @@ class BlogService(SubscribeManager):
         for observer in self._observers:
             observer.update(article)
 
-    def posting(self, article: Article):
+    def post(self, article: Article):
         self.notify(article)
 
 
@@ -81,7 +81,7 @@ if __name__ == "__main__":
         category='IT/Animal',
         link='https://www.sampleblog.co.kr/posting/1',
     )
-    blog_service.posting(article)
+    blog_service.post(article)
     # Animal Article Uploaded : My cat is typing my Computer
     # category: IT/Animal
     # link : https://www.sampleblog.co.kr/posting/1
@@ -95,7 +95,7 @@ if __name__ == "__main__":
         category='Food',
         link='https://www.sampleblog.co.kr/posting/3',
     )
-    blog_service.posting(article)
+    blog_service.post(article)
     # Food Article Uploaded : I like Korean food
     # category: Food
     # link : https://www.sampleblog.co.kr/posting/3
