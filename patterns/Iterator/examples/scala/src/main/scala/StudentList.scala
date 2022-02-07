@@ -2,7 +2,7 @@
 case class Student(name: String, age: Int)
 
 class StudentList {
-  private var studentList = List.empty[Student]
+  var studentList = List.empty[Student]
 
   def append(student: Student): Unit ={
     studentList = studentList :+ student

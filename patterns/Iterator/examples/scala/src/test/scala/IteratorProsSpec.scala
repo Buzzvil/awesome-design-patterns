@@ -6,8 +6,20 @@ class IteratorProsSpec extends AnyFlatSpec {
   exampleStudentList append Student("C", 13)
   exampleStudentList append Student("B", 12)
 
-  "coder" should "implement new types of iterators and pass them to existing code without breaking anything" in {
+  it should "implement new types of iterators and pass them to existing code without breaking anything" in {
+    def sumAges(iterator: Iterator[Student]): Int = iterator.foldLeft(0) (_+_.age)
 
+    val iterator = exampleStudentList.iterator
+    assert(sumAges(iterator) == 36)
+
+    class ReversedStudentList() extends StudentList {
+      override def iterator: Iterator[Student] = studentList.reverse.iterator
+    }
+    val myStudentList = new ReversedStudentList()
+    myStudentList.studentList = exampleStudentList.studentList
+
+    val newIterator = myStudentList.iterator
+    assert(sumAges(newIterator) == 36)
   }
 
   "multiple iterators" should "iterate over the same collection in parallel" in {
@@ -29,7 +41,7 @@ class IteratorProsSpec extends AnyFlatSpec {
     assert(iterator1.next().age == 11)
 
     val iterator2 = exampleStudentList.iterator
-    assert(iterator2.hasNext == true)
+    assert(iterator2.hasNext)
 
     assert(iterator1.next().age == 13)
   }
