@@ -1,6 +1,6 @@
 import org.scalatest.flatspec.AnyFlatSpec
 
-class IteratorPros extends AnyFlatSpec {
+class IteratorProsSpec extends AnyFlatSpec {
   val exampleStudentList = new StudentList()
   exampleStudentList append Student("A", 11)
   exampleStudentList append Student("C", 13)
