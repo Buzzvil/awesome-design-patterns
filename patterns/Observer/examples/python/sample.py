@@ -21,9 +21,16 @@ class Subject(ABC):
         pass
 
 
+NONE_STATE = ''
+
+
 class PhoneStore(Subject):
-    state: str = None
-    _observers: List[Observer] = []
+    state: str
+    _observers: List[Observer]
+
+    def __init__(self) -> None:
+        self.state = NONE_STATE
+        self._observers = []
 
     def attach(self, observer: Observer) -> None:
         self._observers.append(observer)
@@ -43,11 +50,8 @@ class PhoneStore(Subject):
         return self.state
 
 
-NOT_OBSERVED = ''
-
-
 class Observer(ABC):
-    last_notified_state: str = NOT_OBSERVED
+    last_notified_state: str = NONE_STATE
 
     @abstractmethod
     def update(self, subject: Subject) -> None:
@@ -55,12 +59,18 @@ class Observer(ABC):
 
 
 class IPhoneObserver(Observer):
+    def __init__(self) -> None:
+        self.last_notified_state = NONE_STATE
+
     def update(self, subject: Subject) -> None:
         if "IPhone" in subject.get_state():
             self.last_notified_state = subject.get_state()
 
 
 class GalaxyObserver(Observer):
+    def __init__(self) -> None:
+        self.last_notified_state = NONE_STATE
+
     def update(self, subject: Subject) -> None:
         if "Galaxy" in subject.get_state():
             self.last_notified_state = subject.get_state()

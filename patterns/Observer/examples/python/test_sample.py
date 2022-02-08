@@ -1,4 +1,4 @@
-from sample import GalaxyObserver, IPhoneObserver, PhoneStore, NOT_OBSERVED
+from sample import GalaxyObserver, IPhoneObserver, PhoneStore, NONE_STATE
 
 
 def test_phone_store() -> None:
@@ -11,7 +11,7 @@ def test_phone_store() -> None:
     subject.attach(galaxy_observer)
 
     subject.update_state("Galaxy 7")
-    assert iphone_observer.last_notified_state == NOT_OBSERVED
+    assert iphone_observer.last_notified_state == NONE_STATE
     assert galaxy_observer.last_notified_state == "Galaxy 7"
 
     subject.update_state("IPhone 8+")
