@@ -6,6 +6,7 @@ class IteratorProsSpec extends AnyFlatSpec {
   exampleStudentList append Student("C", 13)
   exampleStudentList append Student("B", 12)
 
+  // Open/Closed Principle
   it should "implement new types of iterators and pass them to existing code without breaking anything" in {
     def sumAges(iterator: Iterator[Student]): Int = iterator.foldLeft(0) (_+_.age)
 
