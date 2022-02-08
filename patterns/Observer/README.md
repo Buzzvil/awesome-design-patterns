@@ -35,4 +35,4 @@
 ## Examples
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-* [sample](/Observer/examples/python)
+* [sample](examples/python/test_sample.py)
