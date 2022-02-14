@@ -1,7 +1,7 @@
 import org.scalatest.flatspec.AnyFlatSpec
 
 class IteratorProsSpec extends AnyFlatSpec {
-  val exampleStudentList = new StudentList()
+  val exampleStudentList = new IterableStudentList()
   exampleStudentList append Student("A", 11)
   exampleStudentList append Student("C", 13)
   exampleStudentList append Student("B", 12)
@@ -14,8 +14,7 @@ class IteratorProsSpec extends AnyFlatSpec {
     val iterator = exampleStudentList.iterator
     assert(sumAges(iterator) == 36)
 
-    class ReversedStudentList extends StudentListTrait {
-      def append(student: Student): Unit = { studentList :+= student }
+    class ReversedStudentList extends StudentList with Iterable[Student] {
       override def size: Int = studentList.size
       def iterator: Iterator[Student] = studentList.reverse.iterator
     }

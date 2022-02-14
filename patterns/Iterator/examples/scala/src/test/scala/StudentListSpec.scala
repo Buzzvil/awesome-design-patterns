@@ -17,12 +17,12 @@ class StudentListSpec extends AnyFlatSpec {
   }
 
   "iterator method" should "return iterator of IterableStudentList" in {
-    val iterableStudentList = new IterableStudentList()
-    iterableStudentList append Student("A", 11)
-    iterableStudentList append Student("C", 13)
-    iterableStudentList append Student("B", 12)
+    val studentList = new IterableStudentList()
+    studentList append Student("A", 11)
+    studentList append Student("C", 13)
+    studentList append Student("B", 12)
 
-    val studentListIterator = iterableStudentList.iterator
+    val studentListIterator = studentList.iterator
 
     assert(studentListIterator.next().age == 11)
     assert(studentListIterator.next().name == "C")

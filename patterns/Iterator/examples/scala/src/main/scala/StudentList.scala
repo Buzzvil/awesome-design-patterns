@@ -16,5 +16,6 @@ class StudentList extends StudentListTrait {
 }
 
 class IterableStudentList extends StudentList with Iterable[Student] {
+  override def size: Int = studentList.size
   def iterator: Iterator[Student] = studentList.iterator
 }
