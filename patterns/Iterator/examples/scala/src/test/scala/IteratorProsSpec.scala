@@ -8,20 +8,22 @@ class IteratorProsSpec extends AnyFlatSpec {
 
   // Open/Closed Principle
   it should "implement new types of iterators and pass them to existing code without breaking anything" in {
-    class ReversedStudentList extends StudentListTrait {
-      def append(student: Student): Unit ={ studentList = studentList :+ student }
-      def size: Int = studentList.size
-      def iterator: Iterator[Student] = studentList.reverse.iterator
-    }
+    // existing code
     def sumAges(iterator: Iterator[Student]): Int = iterator.foldLeft(0) (_+_.age)
 
     val iterator = exampleStudentList.iterator
     assert(sumAges(iterator) == 36)
 
-    val myStudentList = new ReversedStudentList()
-    myStudentList.studentList = exampleStudentList.studentList
+    class ReversedStudentList extends StudentListTrait {
+      def append(student: Student): Unit = { studentList :+= student }
+      override def size: Int = studentList.size
+      def iterator: Iterator[Student] = studentList.reverse.iterator
+    }
 
-    val newIterator = myStudentList.iterator
+    val reversedStudentList = new ReversedStudentList()
+    reversedStudentList.studentList = exampleStudentList.studentList
+
+    val newIterator = reversedStudentList.iterator
     assert(sumAges(newIterator) == 36)
   }
 

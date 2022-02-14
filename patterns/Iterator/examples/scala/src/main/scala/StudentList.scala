@@ -5,15 +5,16 @@ trait StudentListTrait {
   var studentList = List.empty[Student]
   def append(student: Student): Unit
   def size: Int
-  def iterator: Iterator[Student]
 }
 
 class StudentList extends StudentListTrait {
-  def append(student: Student): Unit ={
-    studentList = studentList :+ student
+  def append(student: Student): Unit = {
+    studentList :+= student
   }
 
-  def size: Int = studentList.size
+  override def size: Int = studentList.size
+}
 
+class IterableStudentList extends StudentList with Iterable[Student] {
   def iterator: Iterator[Student] = studentList.iterator
 }
