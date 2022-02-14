@@ -1,7 +1,13 @@
 
 case class Student(name: String, age: Int)
 
-class StudentList {
+trait StudentListTrait {
+  def append(student: Student): Unit
+  def size: Int
+  def iterator: Iterator[Student]
+}
+
+class StudentList extends StudentListTrait {
   var studentList = List.empty[Student]
 
   def append(student: Student): Unit ={
