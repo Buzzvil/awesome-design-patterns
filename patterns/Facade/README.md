@@ -76,7 +76,7 @@ class ConcreteClassB:
 
 ### Cons
 
-- indirection level 이 추가됨?
+- 퍼사드가 모든 클래스에 연결된 오브젝트가 될 수도 있음.
 
 ## Examples
 
