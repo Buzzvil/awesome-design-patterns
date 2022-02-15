@@ -36,10 +36,9 @@ Iterator 객체는 현재 위치 및 끝까지 남은 요소 수와 같은 모�
 
 ## Examples
 
-![Scala](https://img.shields.io/badge/scala-%23DC322F.svg?style=for-the-badge&logo=scala&logoColor=white)
-* [Basic Iterator trait](./examples/scala/src/main/scala/CustomIterator.scala), [Basic Iterator Spec](./examples/scala/src/test/scala/CustomIteratorSpec.scala)
+![Kotlin](https://img.shields.io/badge/kotlin-%230095D5.svg?style=for-the-badge&logo=kotlin&logoColor=white)
+* [Basic Iterator Test](./examples/kotlin/src/test/kotlin/CartIteratorTests.kt)
 
-* [Iterator Pros examples](./examples/scala/src/test/scala/IteratorProsSpec.scala)
 
 ## Reference
 [Refactoring.guru](https://refactoring.guru/design-patterns/iterator)
