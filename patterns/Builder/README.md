@@ -1,0 +1,219 @@
+# Builder pattern
+
+## TL;DR
+
+개체를 생성하는 코드를 따로 분리하여 생성자를 복잡하게 만들지 않고 다양한 옵션으로 개체를 생성할 수 있도록 도와주는 패턴
+
+## Problem
+
+다양한 경우의 수를 고려해서 객체를 생성해야 하는 경우 가장 단순한 방법은 '각 경우 마다 클래스를 만드는 것'이다.
+
+```
+class EggMayoSandwich()
+class BmtSandwich()
+```
+
+이를 조금 더 발전시키면 공통 부분을 부모 클래스로 묶어서 '상속'으로 해결할 수 있다.
+
+
+```
+absract class Sandwich()
+
+class EggMayoSandwich(): Sandwich()
+class BmtSandwich(): Sandwich()
+```
+
+하지만 상속으로 인해 하위 클래스가 많아지는 경우 [상속의 단점들](https://www.ianswer4u.com/2017/09/oops-inheritance-advantages.html)로 인해 결국 단일 클래스로 회귀하게 되는데, 그러면 또 다시 아래의 문제에 부딪힌다.
+
+1. 생성할 때 가능한 옵션이 너무 많으면 생성자의 경우의 수가 너무 많아지는 경우가 있다.
+
+```
+class Sandwich {
+  constructor(bread, meat, sauce)
+  constructor(bread, cheese, vegetables)
+  constructor(bread, meat, cheese, vegetables, sauce)
+  ...
+}
+```
+
+예를 들어, 샌드위치를 만드는데 `샌드위치(빵, 고기, 소스)`, `샌드위치(빵, 치즈, 채소)`, `샌드위치(빵, 고기, 치즈, 채소, 소스)` 등 옵션이 많으면 모든 경우의 생성자를 만들기란 사실상 불가능에 가깝다.
+
+물론 필요 없는 파라미터는 null을 넘겨주는 방식으로 생성자를 하나만 유지할 수도 있다. 하지만 필요없는 파라미터를 함께 신경써야 하기 때문에 타입, 순서에 대한 관리가 어려워진다. 이는 다음 문제와도 연관이 있다.
+
+```
+class Sandwich(bread, meat, cheese, vegetables, sauce)
+```
+
+2. 생성자의 파라미터의 순서를 헷갈려서 잘못 넣는 경우 의도하지 않은 개체가 만들어 질 수 있다.
+
+예를 들면 `사람(이름, 나이, 키)`를 받아야 하는데 `사람("Gildong", 175, 25)` 이런 식으로 175살에 25cm인 사람이 만들어질 수 있다.
+
+### 결론
+
+기존의 방식(상속, 거대한 생성자)으로는 각각의 단점으로 인해 복잡한 객체를 생성하는데 한계가 있다. 이를 해결하기 위해 빌더 패턴을 사용해볼 수 있다.
+
+## Solution
+
+빌더 패턴에서는 개체 생성과 관련된 클래스를 별도로 분리하여, 개체를 생성하는 방법이 복잡한 경우(Optional한 속성이 많을 때)에도 동일한 방식으로 생성할 수 있도록 한다.
+
+## Structure
+
+출처: https://en.wikipedia.org/wiki/Builder_pattern
+
+### UML class and sequence diagram
+
+![](https://upload.wikimedia.org/wikipedia/commons/8/87/W3sDesign_Builder_Design_Pattern_UML.jpg)
+
+### Class diagram
+
+![](https://imgur.com/g8AsAjc.jpg)
+
+## Pseudocode
+
+(수도 코드는 아니고 그냥 샘플)
+
+```java
+// 출처: https://ko.wikipedia.org/wiki/%EB%B9%8C%EB%8D%94_%ED%8C%A8%ED%84%B4
+
+/** "Product" */
+class Pizza {
+	private String dough = "";
+	private String sauce = "";
+	private String topping = "";
+
+	public void setDough(String dough) {
+		this.dough = dough;
+	}
+
+	public void setSauce(String sauce) {
+		this.sauce = sauce;
+	}
+
+	public void setTopping(String topping) {
+		this.topping = topping;
+	}
+}
+
+/** "Abstract Builder" */
+abstract class PizzaBuilder {
+	protected Pizza pizza;
+
+	public Pizza getPizza() {
+		return pizza;
+	}
+
+	public void createNewPizzaProduct() {
+		pizza = new Pizza();
+	}
+
+	public abstract void buildDough();
+
+	public abstract void buildSauce();
+
+	public abstract void buildTopping();
+}
+
+/** "ConcreteBuilder" */
+class HawaiianPizzaBuilder extends PizzaBuilder {
+	public void buildDough() {
+		pizza.setDough("cross");
+	}
+
+	public void buildSauce() {
+		pizza.setSauce("mild");
+	}
+
+	public void buildTopping() {
+		pizza.setTopping("ham+pineapple");
+	}
+}
+
+/** "ConcreteBuilder" */
+class SpicyPizzaBuilder extends PizzaBuilder {
+	public void buildDough() {
+		pizza.setDough("pan baked");
+	}
+
+	public void buildSauce() {
+		pizza.setSauce("hot");
+	}
+
+	public void buildTopping() {
+		pizza.setTopping("pepperoni+salami");
+	}
+}
+
+/** "Director" */
+class Cook {
+	private PizzaBuilder pizzaBuilder;
+
+	public void setPizzaBuilder(PizzaBuilder pizzaBuilder) {
+		this.pizzaBuilder = pizzaBuilder;
+	}
+
+	public Pizza getPizza() {
+		return pizzaBuilder.getPizza();
+	}
+
+	public void constructPizza() {
+		pizzaBuilder.createNewPizzaProduct();
+		pizzaBuilder.buildDough();
+		pizzaBuilder.buildSauce();
+		pizzaBuilder.buildTopping();
+	}
+}
+
+/** A given type of pizza being constructed. */
+public class BuilderExample {
+	public static void main(String[] args) {
+		Cook cook = new Cook();
+		PizzaBuilder hawaiianPizzaBuilder = new HawaiianPizzaBuilder();
+		PizzaBuilder spicyPizzaBuilder = new SpicyPizzaBuilder();
+
+		cook.setPizzaBuilder(hawaiianPizzaBuilder);
+		cook.constructPizza();
+
+		Pizza pizza = cook.getPizza();
+	}
+}
+```
+
+## Pros & Cons
+
+### Pros
+
+1. 필요한 데이터만 설정할 수 있음
+2. 유연성을 확보할 수 있음
+3. 가독성을 높일 수 있음
+4. 불변성을 확보할 수 있음
+
+출처: https://mangkyu.tistory.com/163 (각 항목에 대한 구체적인 예시가 있어서 참고하면 좋음)
+
+#### 가독성과 불편성 관련 추가 설명
+
+매개변수가 없는 생성자로 개체를 만든 후, setter를 호출하여 원하는 멤버변수를 초기화하는 패턴을 `JavaBeans` 패턴이라고 한다.
+
+```java
+Person man = new Person();
+man.setName("Gildong");
+man.setAge(25);
+man.setHeight(175);
+```
+
+하지만 이 경우 개체가 생성된 이후에 값을 수정할 수 있다보니 개체의 일관성(불변성)을 보장하기 어렵다.
+빌더 패턴의 경우 자바빈스 패턴의 가독성을 유지하면서도, 생성만을 위해 불필요한 setter를 열어둘 필요가 없어 개체가 생성된 이후 일관성(불변성)이 보장된다.
+
+### Cons
+
+- 정적 분석 불가능
+  - 의도치 않게 선택적 매개변수가 누락되는 경우 IDE의 도움을 받을 수 없음
+  - (자바인 경우) 초기화가 누락된 멤버 변수의 기본값이 null이면 NullPointerExceptoin이 발생할 가능성이 있음
+- 더 많은 코드의 작성이 필요
+  - 생성자의 파라미터가 2-3개 정도로 작은 규모인 경우 굳이 빌더 패턴을 사용하지 말고 그냥 생성자를 2~3개 만들자
+- DTO를 매핑해야 하는 경우 빌더 패턴이랑 그닥 잘 매칭되지 않음
+- (개인적인 의견) named parameter를 사용하면 대부분의 경우에는 빌더 패턴까지 쓰지 않아도 될 것 같다.
+  - 예시: `사람(name = "Gildong", age = 25, height = 175)`
+
+## Examples
+
+[빌더 패턴으로 서브웨이 샌드위치 만들기(Kotlin)](https://github.com/Buzzvil/awesome-design-patterns/pull/27/commits/6cb276c91457e6bd49c3a25d05cf6fc1601dd815)
