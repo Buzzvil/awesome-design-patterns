@@ -22,7 +22,7 @@ class Application(ABC):
     def create_document(self) -> Document:
         raise NotImplementedError()
 
-    def new_document(self):
+    def open_document(self):
         document = self.create_document()
         document.open()
 
@@ -38,8 +38,8 @@ class TextApplication(Application):
 
 
 if __name__ == "__main__":
-    DrawingApplication().new_document()
-    # open drawing document
+    DrawingApplication().open_document()
+    # Open drawing document
 
-    TextApplication().new_document()
+    TextApplication().open_document()
     # Open text document
