@@ -6,12 +6,6 @@ class Document(ABC):
     def open(self):
         print('Open Document')
 
-    def save(self):
-        print('Save Document')
-
-    def close(self):
-        print('Close Document')
-
 
 class DrawingDocument(Document):
     def open(self):
