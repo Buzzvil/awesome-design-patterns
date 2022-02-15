@@ -16,23 +16,15 @@ class CartIteratorTests: BehaviorSpec({
                 }
             }
 
-            `when` ("next 를 호출한다") {
-                val actualNext = cartIterator.next()
+            `when` ("next 를 2번 호출한다") {
+                val actualNext1 = cartIterator.next()
+                val actualNext2 = cartIterator.next()
 
-                then("cartIterator 의 next 는 이름이 'water'인 상품을 반환해야 한다.") {
-                    assertEquals("water", actualNext?.name)
+                then("첫번째는 'water'인 상품, 두번째는 'cola' 인 상품을 반환해야 한다.") {
+                    assertEquals("water", actualNext1?.name)
+                    assertEquals("cola", actualNext2?.name)
                 }
             }
         }
-
-
-
-//        `when` ("Cart 객체에 담긴 상품 리스트를 요청했다.") {
-//            val actualList = emptyCart.getProducts()
-//
-//            then("빈 리스트가 반환되어야 한다.") {
-//                assertEquals(actualList, listOf())
-//            }
-//        }
     }
 })
