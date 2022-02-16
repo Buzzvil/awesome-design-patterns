@@ -11,7 +11,7 @@ class CartIteratorTests: BehaviorSpec({
             `when` ("hasNext 를 호출한다") {
                 val actualHasNext = cartIterator.hasNext()
 
-                then("cartIterator 의 hasNext 는 true를 반환해야 한다.") {
+                then("hasNext() 는 true를 반환해야 한다.") {
                     assertEquals(true, actualHasNext)
                 }
             }
@@ -25,7 +25,7 @@ class CartIteratorTests: BehaviorSpec({
                     assertEquals("cola", actualNext2?.name)
                 }
 
-                and ("next 모두 호출 후 hasNext 를 호출한다") {
+                and ("next 2번 호출 후 hasNext 를 호출한다") {
                     val actualHasNext = cartIterator.hasNext()
 
                     then("Iterating 이 끝났기 때문에 false 를 반환해야 한다.") {
