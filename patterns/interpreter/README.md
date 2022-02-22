@@ -26,42 +26,10 @@ Interpreter 패턴은 다음 해결을 제시합니다.
 
 ![image](url)
 
-클래스의 생성자를 숨기고 유일한 인스턴스를 반환하는 public static operation를 정의합니다.
-private으로 숨겨진 생성자는 클래스 외부에서 인스턴스화 할 수 없고, 이 작업은 클래스명과 operation 이름으로만 접근이 가능합니다.
-이런 면에서, singleton은 다른 패턴들과도 호환이 가능합니다.
-- Abstract factory, factory method, builder, and prototype 패턴도 Singleton으로 만들 수 있습니다.
-- Facade 객체는 단 하나의 facade 객체가 필요하다는 의미에서 Singleton으로 명시되기도 합니다.
-- Singleton은 어떠한 namespace에도 포함되지 않고, lazy allocation과 initialization을 서용하기 때문에 전역 변수처럼 사용이 될 수 있습니다.
-
 ## Pseudocode
 
 ```
-class Log is
-    private static instance: Log
 
-    private constructor Log() is
-    // initialize Log instance
-    public static method getInstance() is
-        if (Log.instance == null) then
-            acquireThreadLock()
-            if (Log.instance == null) then
-                Log.instance = new Log()
-        return Log.instance
-
-    // Any singleton should define some business logic
-    // which can be executed on its instance.
-    public method info(str) is
-        // record
-}
-
-class Application is 
-    method main() is 
-        Log foo = Log.getInstance()
-        foo.info("Hello World!")
-        ...
-        Log bar = Log.getInstance()
-        bar.info("Hello World!")
-        // foo is the same object as bar 
 ```
 
 ## Pros and Cons
