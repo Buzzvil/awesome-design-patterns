@@ -1,3 +1,8 @@
+import pytest
+
+from examples.Prototype.python.basic_example import CommonShape, UserDefinedShape, ConcreteClient, PickyClient
+
+
 class TestShape:
     @pytest.mark.parametrize('shape', (CommonShape(), UserDefinedShape()))
     def test_clone(self, shape):
@@ -11,17 +16,27 @@ class TestShape:
         assert clone.height == shape.height
 
 
-class TestConcreteClient:
+class TestClient:
     @pytest.mark.parametrize(
-        ('prototype', 'expected'),
+        ('client', 'shape_cls', 'shape_kwargs', 'expected'),
         (
             (
-                CommonShape(name='test_common', width=1, height=2), dict(name='test_common', width=1, height=2),
-                UserDefinedShape(name='test_user_defined', width=3, height=4), dict(name='test_user_defined', width=3, height=4),
+                ConcreteClient(),
+                CommonShape,
+                dict(name='test_common', width=1, height=2),
+                dict(name='test_common', width=1, height=2),
+            ),
+            (
+                PickyClient(),
+                UserDefinedShape,
+                dict(name='test_user_defined', width=3, height=4, memo='test_memo'),
+                dict(name='test_user_defined', width=3, height=4, memo='new_memo'),
             )
         )
     )
-    def test_simple_function(self, prototype, expected):
-        client = ConcreteClient()
-        ret = client.simple_function(prototype)
+    def test_simple_function(self, client, shape_cls, shape_kwargs, expected):
+        shape = shape_cls()
+        for k, v in shape_kwargs.items():
+            setattr(shape, k, v)
+        ret = client.simple_function(shape)
         assert ret == expected
