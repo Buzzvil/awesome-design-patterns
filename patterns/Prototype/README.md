@@ -21,6 +21,27 @@
     - 생성 및 사용하는 부분(Client)에서는 항상 같은 도형이 사용되므로 기존에 생성해둔 도형을 복제해서 사용하려고 한다.
     지금은 Shape에서 복제에 관한 인터페이스를 제공하지 않으므로 Client를 상속한 ConcreteClient가 구체 클래스를 참조해서 새로 생성해야 한다.
     한 ConreteClient가 한 ConcreteShape를 담당하도록 참조를 분리하다보니 Client의 구조가 Shape에 의존하게 되었다.
+    ```mermaid
+    classDiagram
+  
+    class Shape
+    <<abstract>> Shape
+    class ConcreteShapeA
+    class ConcreteShapeB
+    ConcreteShapeA --|> Shape
+    ConcreteShapeB --|> Shape
+    
+    class Client {
+        +void someWork()
+    }
+    <<abstract>> Client
+    class ConcreteClientA
+    class ConcreteClientB
+    ConcreteClientA ..> ConcreteShapeA
+    ConcreteClientB ..> ConcreteShapeB
+    ConcreteClientA --|> Client
+    ConcreteClientB --|> Client
+    ```
 
 ## Solution
 
@@ -28,6 +49,23 @@
     - 객체는 내부 값을 알고있으므로 외부에서 복제를 시도하는 것 보다 내부에서 시도하는 것이 더 쉽다.
 - 구체(concrete) 클래스의 인스턴스를 미리 생성해두고 이 인스턴스의 복제를 계속 가져다 사용하는 방식으로 구현한다.
     - 사용하는 클래스가 객체의 구조에 의존하게 되어 문제가 되었던 경우, 사용하는 클래스에 복제를 전달하는 방식으로 해결할 수 있다.
+    ```mermaid
+    classDiagram
+  
+    class Shape {
+        +Shape clone()
+    }
+    <<abstract>> Shape
+    class ConcreteShapeA
+    class ConcreteShapeB
+    ConcreteShapeA --|> Shape
+    ConcreteShapeB --|> Shape
+    
+    class Client {
+        +void someWork(Shape shape)
+    }
+    Client ..> Shape
+    ```
 
 ### Implementation
 
@@ -38,6 +76,19 @@
 이 경우 prototype이 특정 값을 변경하는 operation을 제공해서 Client가 이를 복제한 직후에 사용하거나, Initialize operation을 제공해서 주어진 값으로 prototype의 내부 상태를 새로 지정하는 방법이 있을 수 있다.
 
 ## Structure
+
+```mermaid
+classDiagram
+
+class Prototype {
+    +Prototype clone()
+}
+<<abstract>> Prototype
+
+class ConcretePrototype
+
+ConcretePrototype --|> Prototype
+```
 
 
 ## Pros & Cons
