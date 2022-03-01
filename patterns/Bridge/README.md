@@ -45,7 +45,76 @@ UI와 로직을 분리하는 것도 일종의 브릿지 패턴이다. ~~우린 �
 
 ## Pseudocode
 
-작성 예정
+refactoring guru의 예제를 Kotlin으로 작성
+
+```kotlin
+interface Device {
+    fun isEnabled(): Boolean
+    fun enable()
+    fun disable()
+    fun getVolume(): Int
+    fun setVolume(percent: Int)
+    fun getChannel(): Int
+    fun setChannel(channel: Int)
+}
+
+class Tv : Device {
+    // ...
+}
+
+class Radio : Device {
+    // ...
+}
+```
+
+```kotlin
+open class RemoteControl(
+    private val device: Device
+) {
+    fun togglePower() {
+        if (device.isEnabled()) {
+            device.disable()
+        } else {
+            device.enable()
+        }
+    }
+
+    fun volumeDown() {
+        device.setVolume(device.getVolume() - 10)
+    }
+
+    fun volumeUp() {
+        device.setVolume(device.getVolume() + 10)
+    }
+
+    fun channelDown() {
+        device.setChannel(device.getChannel() - 1)
+    }
+
+    fun channelUp() {
+        device.setChannel(device.getChannel() + 1)
+    }
+}
+
+class AdvancedRemoteControl(
+    private val device: Device
+) : RemoteControl(device) {
+    fun mute() {
+        device.setVolume(0)
+    }
+}
+```
+
+```kotlin
+// client code
+val tv = Tv()
+val remote = RemoteControl(tv)
+remote.togglePower()
+
+val radio = Radio()
+val advancedRemote = AdvancedRemoteControl(radio)
+advancedRemote.mute()
+```
 
 ## Pros & Cons
 
