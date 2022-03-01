@@ -40,5 +40,8 @@ class Robot(val head: Head, val body: Body) : Cloneable {
 
         // 얕은 복사
         // return Robot(head, body)
+
+        // super.clone()으로 간단하게 복사할 수 있으나 이것도 얕은 복사(모든 멤버 변수가 primary라면 괜찮을듯)
+        // return super.clone() as Robot
     }
 }
