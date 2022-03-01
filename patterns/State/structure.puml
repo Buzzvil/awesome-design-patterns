@@ -1,29 +1,31 @@
 @startuml
-interface Subject{
-  attach(observer)
-  detach(observer)
-  notify()
-}
-class ConcreteSubject{
-  attach(observer)
-  detach(observer)
-  notify()
+class System{
+  do_job_A()
+  do_job_B()
+  do_job_C()
+  change_state()
 }
 
-interface Observer {
-  update()
+interface State{
+  do_job_A()
+  do_job_B()
+  do_job_C()
 }
-class ConcreteObserverA {
-  update()
+
+class ConcreteStateA {
+  do_job_A()
+  do_job_B()
+  do_job_C()
 }
-class ConcreteObserverB {
-  update()
+class ConcreteStateB {
+  do_job_A()
+  do_job_B()
+  do_job_C()
 }
 
 
-ConcreteObserverA -u-> Observer
-ConcreteObserverB -u-> Observer
-ConcreteSubject -u-> Subject
-Subject .l.> Observer
+ConcreteStateA -u-> State
+ConcreteStateB -u-> State
+System .l.> State
 
 @enduml
