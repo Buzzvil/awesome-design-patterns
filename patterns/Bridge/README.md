@@ -145,7 +145,7 @@ advancedRemote.mute()
 
 ## Examples
 
-작성 예정
+패턴 자체가 단순해서 수도 코드로 대체...
 
 ## 출처
 
