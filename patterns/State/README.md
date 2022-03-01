@@ -32,6 +32,9 @@
 - 상태 시스템에 몇 가지 상태만 있거나 거의 변경되지 않는 경우, 패턴을 적용하는 것이 과도할 수 있습니다.
 
 
+## Relations with Other Patterns
+- Strategy 패턴과 State 패턴 모두 일부 작업을 별도 객체에 위임한다는 점에서 비슷합니다. Strategy 패턴은 별도 객체를 완전히 독립적으로 만들고 서로를 인식하지 못하게 합니다. State 패턴은 행동울 위임받은 객체들이 서로를 인식하며, 다른 객체로의 전이를 직접 다룹니다.
+
 ## Examples
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
