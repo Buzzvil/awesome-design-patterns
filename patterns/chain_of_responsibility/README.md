@@ -27,12 +27,26 @@ graph LR;
 - 나중에 누군가는 시스템이 무차별 암호 해독에 취약하다는 사실을 알아냈다. 이를 막기 위해 동일한 IP 주소에서 오는 반복적인 실패 요청을 필터링하는 검사를 즉시 추가했다.
 - 같은 데이터를 가진 반복 요청은 임시저장된 결과를 반환함으로 인해 시스템의 속도를 향상시킬 수 있다고 제안했다. 그 결과 적절한 임시 저장 결과가 없는 경우에만 요청이 시스템으로 전달되도록 하는 또 다른 검사를 추가했다.
 
+[![](https://mermaid.ink/img/pako:eNpNj80KwjAQhF8l7KlF2weoIPh3EwUFQYyHtdnaoEk0TQ5qfXe3aME9zSzfDrMvKJ0iKODs8VaL5WYkreCZHDZ0j9SEo8iysZgmySSGmmzQJQbtrBiIbuG8fvZ-h1etejPDstb2zCrP8zT9hk67rHZPTStmh7VX5Dtk-2gCmeM_snKtmCcVFhVmJ7QpDMGQN6gVN311pARuY0hCwVKhv0iQ9s1cvHEHWigdnAe-vzY0BIzBbR-2hCL4SD0018hfmx_1_gBEvFaP)](https://mermaid.live/edit#pako:eNpNj80KwjAQhF8l7KlF2weoIPh3EwUFQYyHtdnaoEk0TQ5qfXe3aME9zSzfDrMvKJ0iKODs8VaL5WYkreCZHDZ0j9SEo8iysZgmySSGmmzQJQbtrBiIbuG8fvZ-h1etejPDstb2zCrP8zT9hk67rHZPTStmh7VX5Dtk-2gCmeM_snKtmCcVFhVmJ7QpDMGQN6gVN311pARuY0hCwVKhv0iQ9s1cvHEHWigdnAe-vzY0BIzBbR-2hCL4SD0018hfmx_1_gBEvFaP)
+
 이미 뒤죽박죽 꼬인 검사 코드는 새로운 기능을 추가할 때 마다 점점 더 부풀려졌다. 하나의 검사를 변경하면 때때로 다른 검사에 영향을 준다. 최악의 경우 시스템의 다른 구성 요소를 보호하기 위해 검사를 재사용하려고 할 때, 해당 코드 일부가 필요하지만 전부는 아니기 때문에 코드를 일부만 복제해야 했다.  
 
 시스템은 이해하기 매우 어렵고 유지관리 비용이 비싸게 되었다. 전체 코드를 리팩토링하기로 결정할 때까지 당신은 한동안 코드와 씨름하게 되었다.
 
 ## Solution
+다른 많은 행동 디자인 패턴과 마찬가지로, **Chain of Responsibility** 는 특정 행동을 *핸들러*라고 하는 독립 실행형 개체로 변환하고 이에 의존한다. 위 문제의 경우 각 검사는 검사를 수행하는 자체 클래스의 단일 메소드로 추출되어야 한다. 요청은 데이터와 함께 해당 메소드에 인수로 전달된다.
 
+패턴은 이러한 핸들러들을 체인으로 연결하도록 제안한다. 연결된 각 핸들러에는 체인의 다음 핸들러에 대한 참조를 저장하기 위한 필드가 있다. 요청을 처리하는 것 외에도 핸들러는 체인을 따라 요청을 더 전달한다. 요청은 모든 핸들러가 처리할 기회를 가질 때까지 체인을 따라 이동한다.
+
+**핸들러는 요청을 더 이상 체인 아래로 전달하지 않고 추가 처리를 효과적으로 중지할 수 있다.**
+
+위 예제의 주문시스템에서 핸들러는 처리를 수행한 다음 요청을 체인 아래로 더 전달할지 여부를 결정한다. 요청에 올바른 데이터가 포함되어있다면 모든 핸들러는, 인증이든 검증이든, 본연의 동작을 실행할 수 있다.
+
+그러나 요청을 수신하면 핸들러가 처리할 수 있는지 여부를 결정하는 약간 다른 접근방식이 있다. 가능한 경우에는 더 이상 요청을 전달하지 않는다. 따라서 요청을 처리하는 핸들러는 오직 하나 혹은 없게 된다. 이 접근 방식은 GUI 내에서 요소 스택의 이벤트를 처리할 때 매우 일반적이다.
+
+예를 들어, 사용자가 버튼을 클릭하면 이벤트는 버튼에서 메인 애플리케이션 창까지 해당 컨테이너를 따라 이동하는 GUI 요소 체인을 통해 전파된다. 이벤트는 처리할 수 있는 체인의 첫 번째 요소에 의해 처리된다. 이 예는 또한 체인이 항상 개체 트리에서 추출될 수 있음을 보여주기 때문에 주목할 만 하다.
+
+모든 핸들러 클래스가 동일한 인터페이스를 구현하는 것은 중요하다. 각 핸들러는 `execute` 메소드가 있는 다음 핸들러에 대해서만 신경을 써야 한다. 이렇게 하면 코드를 클래스에 연결하지 않고도 다양한 핸들러를 사용하여 런타임에 체인을 구성할 수 있다.
 
 ## Structure
 
