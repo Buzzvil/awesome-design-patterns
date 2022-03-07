@@ -1,3 +1,3 @@
 interface Expression {
-    fun interpreter(content: String): Boolean
+    fun interpreter(data: String): Boolean
 }
