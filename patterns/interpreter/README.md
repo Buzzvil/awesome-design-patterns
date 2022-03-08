@@ -24,7 +24,7 @@ Interpreter 패턴은 다음 해결을 제시합니다.
 
 ## Structure
 
-![image](url)
+![image](https://www.planttext.com/api/plantuml/svg/ZP7D2i8m383lUOgmaquwy2eYa-d1YnTzWReLAVIFDiE1-kuMHsM7ChmKadp9rxHr8Ewfrmg092c19qF2Eo_YYGmlNBkOR1GF0G-ItptN0D1-uqP9OIW5DZOEb6hxMo3FMpeESLO8qXfy0k9Afl6B9RmJV1LUIyFLF3ooPsl-mo5pXUsBTVPXCi8vEgi46DT7jiiiEod-7YPZADPLLPK5bgntBE_Pe9WuQs6w-5aV)
 
 ## Pseudocode
 
