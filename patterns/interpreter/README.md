@@ -29,7 +29,35 @@ Interpreter 패턴은 다음 해결을 제시합니다.
 ## Pseudocode
 
 ```
+class Interpreter {
+    interface Expr {
+        int interpret(Map<String, Integer> context);
 
+        static Expr number(int number) {
+            return context -> number;
+        }
+
+        static Expr plus(Expr left, Expr right) {
+            return context -> left.interpret(context) + right.interpret(context);
+        }
+
+        static Expr minus(Expr left, Expr right) {
+            return context -> left.interpret(context) - right.interpret(context);;
+        }
+
+        static Expr times(Expr left, Expr right) {
+            return context -> left.interpret(context) * right.interpret(context);;
+        }
+
+        static Expr divide(Expr left, Expr right) {
+            return context -> left.interpret(context) / right.interpret(context);
+        }
+
+        static Expr variable(String name) {
+            return context -> context.getOrDefault(name, 0);
+        }
+    }
+}
 ```
 
 ## Pros and Cons
