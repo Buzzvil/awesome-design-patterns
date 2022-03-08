@@ -12,7 +12,7 @@ input string을 변환시켜주는 TextConverter Interface가 있다. 이 TextCo
 TextConverter를 상속받는 BaseLogger class를 만들어 TextConverter의 객체에 대한 참조자를 갖게 한다. 
 그리고 BaseLogger를 상속받은 InputLogger와 ResultLogger를 만들어, abstract method인 operation을 구현할 때 참조자로 갖고 있는 TextConverter 객체의 operation을 호출한다.
 이 때 하고싶은 것들을 Logger들의 operation에 구현하면 된다. FinishLogger는 참조자의 operation 결과를 받아 로깅하고 이를 다시 리턴해주면 된다.
-사용자는 원하는 로거를 원하는 TextConverter 구현체에 wrapping 해서 사용하면 된다.  
+사용자는 원하는 로거를 원하는 TextConverter 구현체를 wrapping 해서 사용하면 된다.  
 ```python
 text_converter = TextReverseConverter()
 text_converter = ResultLogger(text_converter)
