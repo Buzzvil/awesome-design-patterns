@@ -2,5 +2,5 @@
 class TerminalExpression(expressionData: String): Expression {
     private val expressionData = expressionData
 
-    override fun interpreter(context: String): Boolean = this.expressionData == context
+    override fun interpreter(data: String): Boolean = this.expressionData == data
 }
