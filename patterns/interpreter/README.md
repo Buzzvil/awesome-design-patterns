@@ -30,6 +30,7 @@ Interpreter 패턴은 다음 해결을 제시합니다.
 
 ```
 class Interpreter {
+    @FunctionalInterface
     interface Expr {
         int interpret(Map<String, Integer> context);
 
@@ -57,7 +58,38 @@ class Interpreter {
             return context -> context.getOrDefault(name, 0);
         }
     }
+    private static Expr parseToken(String token, ArrayDeque<Expr> stack) {
+        Expr left, right;
+        switch (token) {
+        case "+":
+            right = stack.poop();
+            left = stack.pop();
+            return Expr.plus(left, right);
+        case "-":
+            right = stack.poop();
+            left = stack.pop();
+            return Expr.minus(left, right);
+        case "*":
+            right = stack.poop();
+            left = stack.pop();
+            return Expr.times(left, right);
+        case "/":
+            right = stack.poop();
+            left = stack.pop();
+            return Expr.divide(left, right);
+        default:
+            return Expr.variable(token);
+        }
+    }
+    public static Expr parse(String expression) {
+        ArrayDeque<Expr> stack = new ArrayDeque<Expr>();
+        for (String token : expression.split(' ')) {
+            stack.push(parseToken(token, stack));
+        }
+        return stack.pop();
+    }
 }
+
 ```
 
 ## Pros and Cons
