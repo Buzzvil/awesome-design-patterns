@@ -23,32 +23,32 @@ class Mode(ABC):
 
 class NormalMode(Mode):
     def process_input(self, editor: Editor, c: Optional[str]) -> None:
-        if c == 'h':
+        if c == 'h':  # move left
             editor.pos_x = max(0, editor.pos_x - 1)
-        elif c == 'j':
+        elif c == 'j':  # move down
             editor.pos_y += min(len(editor.text), editor.pos_y + 1)
-        elif c == 'k':
+        elif c == 'k':  # move up
             editor.pos_y = max(0, editor.pos_y - 1)
-        elif c == 'l':
+        elif c == 'l':  # move right
             editor.pos_x += min(len(editor.text[editor.pos_y]), editor.pos_x + 1)
-        elif c == 'x':
+        elif c == 'x':  # delete character at current position
             editor.text[editor.pos_y].pop(editor.pos_x - 1)
             if editor.pos_x >= len(editor.text[editor.pos_y]):
                 editor.pos_x -= 1
-        elif c == 'o':
+        elif c == 'o':  # add new line and start insert
             editor.pos_y += 1
             editor.pos_x = 0
             editor.text.insert(editor.pos_y, list())
             editor.mode = InsertMode()
-        elif c == 'i':
+        elif c == 'i':  # start insert
             editor.mode = InsertMode()
-        elif c == 'v':
+        elif c == 'v':  # start visual mode
             editor.mode = VisualMode()
 
 
 class InsertMode(Mode):
     def process_input(self, editor: Editor, c: Optional[str]) -> None:
-        if c == ESCAPE_CHARACTER:
+        if c == ESCAPE_CHARACTER:  # stop insert mode
             editor.mode = NormalMode()
         else:
             if editor.pos_y > len(editor.text):
@@ -69,15 +69,15 @@ class VisualMode(Mode):
         if self._orig_x == -1:
             self._orig_x = editor.pos_x
             self._orig_y = editor.pos_y
-        if c == 'h':
+        if c == 'h':  # move left
             editor.pos_x = max(0, editor.pos_x - 1)
-        elif c == 'j':
+        elif c == 'j':  # move down
             editor.pos_y += min(len(editor.text), editor.pos_y + 1)
-        elif c == 'k':
+        elif c == 'k':  # move up
             editor.pos_y = max(0, editor.pos_y - 1)
-        elif c == 'l':
+        elif c == 'l':  # move right
             editor.pos_x += min(len(editor.text[editor.pos_y]), editor.pos_x + 1)
-        elif c == 'x':
+        elif c == 'x':  # delete all characters in scope
             for y in range(min(editor.pos_y, self._orig_y), min(max(editor.pos_y, self._orig_y) + 1, len(editor.text))):
                 min_x = min(editor.pos_x, self._orig_x)
                 max_x = max(editor.pos_x, self._orig_x)
