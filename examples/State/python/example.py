@@ -26,15 +26,20 @@ class NormalMode(Mode):
         if c == 'h':
             editor.pos_x = max(0, editor.pos_x - 1)
         elif c == 'j':
-            editor.pos_y = max(0, editor.pos_y - 1)
-        elif c == 'k':
             editor.pos_y += min(len(editor.text), editor.pos_y + 1)
+        elif c == 'k':
+            editor.pos_y = max(0, editor.pos_y - 1)
         elif c == 'l':
             editor.pos_x += min(len(editor.text[editor.pos_y]), editor.pos_x + 1)
         elif c == 'x':
             editor.text[editor.pos_y].pop(editor.pos_x - 1)
             if editor.pos_x >= len(editor.text[editor.pos_y]):
                 editor.pos_x -= 1
+        elif c == 'o':
+            editor.pos_y += 1
+            editor.pos_x = 0
+            editor.text.insert(editor.pos_y, list())
+            editor.mode = InsertMode()
         elif c == 'i':
             editor.mode = InsertMode()
         elif c == 'v':
@@ -55,25 +60,27 @@ class InsertMode(Mode):
 class VisualMode(Mode):
     def __init__(self):
         super(VisualMode, self).__init__()
-        self._new_x = -1
-        self._new_y = -1
+        self._orig_x = -1
+        self._orig_y = -1
 
     def process_input(self, editor: Editor, c: Optional[str]) -> None:
         if c == ESCAPE_CHARACTER:
             editor.mode = NormalMode()
-        if self._new_x == -1:
-            self._new_x = editor.pos_x
-            self._new_y = editor.pos_y
+        if self._orig_x == -1:
+            self._orig_x = editor.pos_x
+            self._orig_y = editor.pos_y
         if c == 'h':
-            self._new_x = max(0, self._new_x - 1)
+            editor.pos_x = max(0, editor.pos_x - 1)
         elif c == 'j':
-            self._new_y = min(len(editor.text), self._new_y + 1)
+            editor.pos_y += min(len(editor.text), editor.pos_y + 1)
         elif c == 'k':
-            self._new_y = max(0, self._new_y - 1)
+            editor.pos_y = max(0, editor.pos_y - 1)
         elif c == 'l':
-            self._new_y = min(len(editor.text[self._new_x]), self._new_x + 1)
+            editor.pos_x += min(len(editor.text[editor.pos_y]), editor.pos_x + 1)
         elif c == 'x':
-            for y in range(min(editor.pos_y, self._new_y), max(editor.pos_y, self._new_y) + 1):
-                min_x = min(editor.pos_x, self._new_x)
-                max_x = max(editor.pos_x, self._new_x)
-                editor.text[y] = editor.text[y][:min_x] + editor.text[y][max_x + 1:]
+            for y in range(min(editor.pos_y, self._orig_y), min(max(editor.pos_y, self._orig_y) + 1, len(editor.text))):
+                min_x = min(editor.pos_x, self._orig_x)
+                max_x = max(editor.pos_x, self._orig_x)
+                editor.text[y] = editor.text[y][:min_x - 1] + editor.text[y][min(max_x, len(editor.text[y])):]
+            editor.pos_x -= 1
+            editor.mode = NormalMode()
