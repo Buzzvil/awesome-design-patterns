@@ -25,7 +25,7 @@
 ## Pros & Cons
 장점
 - 기존 코드를 변경하지 않고 새로운 상태를 추가할 수 있어서 개방 폐쇄 원칙(Open-Closed Principle)을 준수합니다.
-- 특정 상태와 관련된 코드를 별도의 클래스로 구성하여 단일 책임 원칙(Single Responsibility Principle)을 준수합니다합
+- 특정 상태와 관련된 코드를 별도의 클래스로 구성하여 단일 책임 원칙(Single Responsibility Principle)을 준수합니다.
 - 부피가 큰 상태 조건을 제거하여 코드를 단순화할 수 있습니다.
 
 단점
@@ -33,9 +33,9 @@
 
 
 ## Relations with Other Patterns
-- Strategy 패턴과 State 패턴 모두 일부 작업을 별도 객체에 위임한다는 점에서 비슷합니다. Strategy 패턴은 별도 객체를 완전히 독립적으로 만들고 서로를 인식하지 못하게 합니다. State 패턴은 행동울 위임받은 객체들이 서로를 인식하며, 다른 객체로의 전이를 직접 다룹니다.
+- Strategy 패턴과 State 패턴 모두 일부 작업을 별도 객체에 위임한다는 점에서 비슷합니다. Strategy 패턴은 별도 객체를 완전히 독립적으로 만들고 서로를 인식하지 못하게 합니다. State 패턴은 행동을 위임받은 객체들이 서로를 인식하며, 다른 객체로의 전이를 직접 다룹니다.
 
 ## Examples
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-* [sample](examples/State/python/example.py)
+* [sample](../../examples//State/python/example.py)
