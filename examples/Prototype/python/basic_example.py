@@ -18,6 +18,10 @@ class Shape(ABC):
     def from_shape(cls, shape: Shape) -> Shape:
         pass
 
+    @abstractmethod
+    def to_dict(self) -> Dict[str, Any]:
+        pass
+    
     def initialize(self, **kwargs: ...) -> None:
         return
 
@@ -38,6 +42,9 @@ class CommonShape(Shape):
 
     def clone(self) -> Shape:
         return self.from_shape(self)
+    
+    def to_dict(self) -> Dict[str, Any]:
+        return dict(name=self.name, width=self.width, height=self.height)
 
 
 class UserDefinedShape(Shape):
@@ -58,6 +65,9 @@ class UserDefinedShape(Shape):
 
     def clone(self) -> Shape:
         return self.from_shape(self)
+    
+    def to_dict(self) -> Dict[str, Any]:
+        return dict(name=self.name, width=self.width, height=self.height, memo=self.memo)
 
     def initialize(self, **kwargs: ...) -> None:
         for k, v in kwargs.items():
@@ -73,11 +83,11 @@ class Client(ABC):
 class ConcreteClient(Client):
     def simple_function(self, shape: Shape) -> Dict[str, Any]:
         clone = shape.clone()
-        return dict(name=clone.name, width=clone.width, height=clone.height)
+        return clone.to_dict()
 
 
 class PickyClient(Client):
     def simple_function(self, shape: Shape) -> Dict[str, Any]:
         shape.initialize(memo='new_memo')
         clone = shape.clone()
-        return dict(name=clone.name, width=clone.width, height=clone.height, memo=clone.memo)
+        return clone.to_dict()
