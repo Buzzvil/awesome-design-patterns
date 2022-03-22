@@ -5,6 +5,10 @@ from typing import Optional, Dict, Any
 
 
 class Shape(ABC):
+    name: str
+    width: int
+    height: int
+    
     @abstractmethod
     def clone(self) -> Shape:
         pass
