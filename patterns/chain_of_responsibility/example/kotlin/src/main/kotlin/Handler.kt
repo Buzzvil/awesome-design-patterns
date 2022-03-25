@@ -1,7 +1,14 @@
-interface Handler {
-    fun setNext(handler: Handler): Handler
+class Handler: HandlerInterface {
+    var nextHandler: Handler? = null
 
-    fun handle(request: String): String?
+    override fun handle(request: String): String? {
+        print("called handle with request:" + request)
+        return nextHandler?.handle(request)
+    }
 
-    var nextHandler: Handler?
+    override fun setNext(handler: Handler): Handler {
+        this.nextHandler = handler
+        return handler
+    }
 }
+
