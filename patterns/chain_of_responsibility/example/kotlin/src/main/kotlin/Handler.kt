@@ -1,4 +1,4 @@
-class Handler: HandlerInterface {
+open class Handler: HandlerInterface {
     var nextHandler: Handler? = null
 
     override fun handle(request: String): String? {
@@ -11,4 +11,3 @@ class Handler: HandlerInterface {
         return handler
     }
 }
-
