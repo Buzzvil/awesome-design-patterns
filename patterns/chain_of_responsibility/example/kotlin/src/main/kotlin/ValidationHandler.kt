@@ -1,10 +1,10 @@
-class AuthenticationHandler: Handler() {
+class ValidationHandler: Handler() {
     override fun handle(request: String): String {
-        if (request.contains("authenticated")) {
+        if (request.contains("validated")) {
             return super.handle(request)
         }
         else {
-            return "Authentication fail"
+            return "Validation fail"
         }
     }
 }

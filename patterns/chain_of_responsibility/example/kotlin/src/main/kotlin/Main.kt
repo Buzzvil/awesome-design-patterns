@@ -1,10 +1,22 @@
+fun someClientCode(handler: Handler, requestContent: String) {
+    val result = handler.handle(requestContent)
+    println("\"$requestContent\": $result")
+}
+
 fun main(args: Array<String>) {
-    println("Hello World!")
+    val authentication = AuthenticationHandler()
+    val authorization = AuthorizationHandler()
+    val validation = ValidationHandler()
+    authentication
+        .setNext(authorization)
+        .setNext(validation)
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-//    println("Program arguments: ${args.joinToString()}")
+    val authenticatedOnlyRequest = "only authenticated"
+    println("Chain: Authentication ✅ -> Authorization ❌")
+    someClientCode(handler = authentication, requestContent = authenticatedOnlyRequest)
+    println()
 
-    val auth = AuthenticationHandler()
-    auth.handle("haha")
+    val allPassRequest = "authenticated and authorized and validated"
+    println("Chain: Authentication ✅ -> Authorization ✅ -> Validation ✅")
+    someClientCode(handler = authentication, requestContent = allPassRequest)
 }
