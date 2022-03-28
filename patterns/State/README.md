@@ -23,10 +23,10 @@
 classDiagram
 class System{
     -  state
+    - change_state()
     + do_job_A()
     + do_job_B()
     + do_job_C()
-    + change_state()
 }
 class State{
     + do_job_A()
