@@ -19,34 +19,34 @@
 - 테니스 코트는 상태 객체를 가지고 있고, 상태 객체가 실질적인 동작을 수행하도록 위임합니다.
 
 ## Structure
-   ```mermaid
-    classDiagram
-    class System{
-      -  state
-      + do_job_A()
-      + do_job_B()
-      + do_job_C()
-      + change_state()
-    }
-    class State{
-      + do_job_A()
-      + do_job_B()
-      + do_job_C()
-    }
-    class ConcreteStateA{
-      + do_job_A()
-      + do_job_B()
-      + do_job_C()
-    }
-    class ConcreteStateB{
-      + do_job_A()
-      + do_job_B()
-      + do_job_C()
-    }
-    System --> State
-    State <|-- ConcreteStateA
-    State <|-- ConcreteStateB
-    ```
+```mermaid
+classDiagram
+class System{
+    -  state
+    + do_job_A()
+    + do_job_B()
+    + do_job_C()
+    + change_state()
+}
+class State{
+    + do_job_A()
+    + do_job_B()
+    + do_job_C()
+}
+class ConcreteStateA{
+    + do_job_A()
+    + do_job_B()
+    + do_job_C()
+}
+class ConcreteStateB{
+    + do_job_A()
+    + do_job_B()
+    + do_job_C()
+}
+System --> State
+State <|-- ConcreteStateA
+State <|-- ConcreteStateB
+```
 
 
 ## Pros & Cons
