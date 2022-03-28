@@ -1,4 +1,4 @@
-// 원격(remote) 프록시: 원격 서비스의 로컬 실행
+// 원격(remote) 프록시 예제: 원격 서비스의 로컬 실행
 interface Company {
     fun requestVoiceOfCustomer(): String
 }

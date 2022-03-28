@@ -1,4 +1,4 @@
-// 보호(protection) 프록시: 엑세스 제어
+// 보호(protection) 프록시 예제: 엑세스 제어
 interface NuclearBomb {
     fun launch()
 }
