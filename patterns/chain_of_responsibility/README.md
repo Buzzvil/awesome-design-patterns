@@ -58,14 +58,14 @@ graph LR;
    핸들러는 일반적으로 변화불가하고, 독립적이고, 생성자를 통해 필요한 모든 데이터를 한 번만 받아들인다.
 4. 클라이언트는 응용 프로그램의 의사에 따라 체인을 한 번만 구성하거나 동적으로 구성할 수 있다. 요청은 체인의 모든 핸들러로 보낼 수 있지만, 첫번째 핸들러일 필요는 없다.
 
-### Pros and Cons
+### Pros 
 ✅ 요청 처리 순서를 제어할 수 있다.
 
 ✅ *Single Responsibility Principle*. 작업을 수행하는 클래스에서 작업을 호출하는 클래스를 분리할 수 있다.
 
 ✅ *Open/Closed Principle*. 기존 클라이언트 코드 변화 없이 새 핸들러를 도입할 수 있다.
 
-❌ 일부 요청은 처리되지 않을 수 있다.
 
+## Reference
 
-## Examples
+[Refactoring.guru](https://refactoring.guru/design-patterns/chain-of-responsibility)
