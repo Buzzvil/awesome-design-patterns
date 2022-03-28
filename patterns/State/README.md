@@ -20,7 +20,7 @@
 
 ## Structure
    ```mermaid
-classDiagram
+    classDiagram
     class System{
       -  state
       + do_job_A()
