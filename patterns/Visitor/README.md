@@ -25,7 +25,7 @@
 (편의상 각 분류의 모든 상품이 가격이 동일하다고 가정합시다.)
 각 객체가 수행해야할 동작을 포함하는 방식으로 구현한다면 아래와 같이 구현하는 것을 상상해볼 수 있겠습니다.
 
-```mermiad
+```mermaid
 classDiagram
 class Bucket {
     Sequence[Product] products
