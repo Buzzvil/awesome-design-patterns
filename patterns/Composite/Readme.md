@@ -1,4 +1,4 @@
-# Iterator 
+# Composite 
 ## Intent
 **Composite** 는 개체를 트리 구조로 구성한 다음 이런 구조를 개별 개체인 것처럼 작업할 수 있는 구조적 디자인 패턴이다.
 
