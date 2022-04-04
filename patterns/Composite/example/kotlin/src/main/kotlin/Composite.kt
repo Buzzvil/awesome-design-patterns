@@ -1,12 +1,12 @@
 class Composite: Component {
-    var children: MutableList<Component> = mutableListOf<Component>()
+    val children: MutableList<Composite> = mutableListOf<Composite>()
 
-    fun add(component: Component) {
-        this.children.add(component)
+    fun add(composite: Composite) {
+        this.children.add(composite)
     }
 
-    fun getChildren(): List<Component> {
-        return this.children
+    override fun isLeaf(): Boolean {
+        return false
     }
 
     override fun execute(): Int {
