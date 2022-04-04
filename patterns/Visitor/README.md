@@ -96,30 +96,51 @@ Visitor는 각 클래스에 대해서 어떤 동작을 할지를 정의합니다
 
 ### Double Dispatch
 
-이렇게 구현하면 어떨까요?
+Visitor 패턴은 double dispatch 를 이용합니다.
+Double dispatch 는 multiple dynamic dispatch 의 특수한 케이스입니다.
+여기서 dynamic dispatch 는 method dispatch 를 런타임에 한다는 의미입니다.
+Method dispatch 는 polymorphic method 의 선택을 돕는 방법입니다.
+
+Method overloading 을 이용한다면 아래처럼 할 수 있겠으나, 파라미터들의 타입을 미리 알지 못한다면 사용할 수 없습니다.
 
 ```
-class Calculator
-    func getPrice(p: Product):
-        return 1000
-    func getPrice(b: Beverage):
-        return 1500
-    func getPrice(s: Snack):
-        return 2000
+func add(NumberType a, NumberType b):
+    return a.add(b)
 
-class App
-    func getPrice(p: Product):
-        Calculator c = new Calculator()
-        print(c.getPrice(p))
+func add(StringType a, StringType b):
+    return a.addString(b)
 ```
 
-이 구현에서 Dynamic binding을 지원하지 않는 언어에서는 항상 Product의 가격을 얻게됩니다.
-이는 이미 기능이 구현되어있는 Beverage, Snack이 아닌 다른 타입이 들어왔을 때 컴파일러의 동작을 예측할 수 없어 Product로 가정하기 때문으로, 컴파일러의 동작을 따릅니다. [1]
+Visitor 패턴을 쓰면 이런 식으로 변경할 수 있겠습니다.
+여기서 볼 수 있듯 함수 호출에 두 타입, Visitor와 Visitable 에 의존하는 double dispatch 를 이용하고 있습니다.
 
-Double dispatch는 한 요청에 대해 두 개의 수신자에 의존해 실행되는 방식입니다.
-여기서 두 개의 수신자란 Visitor와 Visitor를 호출하는 클래스를 의미합니다.
+```
+class Visitor:
+    func visitNumber(NumberType a, NumberType b):
+        pass
+    func visitString(StringType a, StringType b):
+        pass
 
-TODO
+class Add(Visitor):
+    func visitNumber(NumberType a, NumberType b):
+        return a.add(b)
+    func visitString(StringType a, StringType b):
+        return a.addString(b)
+
+class Visitable:
+    func accept(Visitor v):
+        pass
+
+class NumberVisitable:
+    NumberType x, y
+    func accept(Visitor v):
+        return v.visitInt(this.x, this.y)
+
+class StringVisitable:
+    StringType x, y
+    func accept(Visitor v):
+        return v.visitTupleInt(this.x, this.y)
+```
 
 
 ## Structure
@@ -159,10 +180,18 @@ Client --> Visitor
 
 ## Pros and Cons
 
-- TODO
+- Pros
+    - SRP: 같은 기능을 한 클래스에 넣을 수 있음.
+    - OCP: 기존 클래스를 변경하지 않고 새 기능을 추가할 수 있음.
+    - Visitor 가 Visitable 을 순회하면서 유용한 정보를 축적할 수 있음.
+- Cons
+    - Visitable 클래스들이 Visitor를 알고있어야 함.
+    - Visitable 이 제거될때마다 Visitor를 업데이트해야 함.
+    - Visitor 가 Visitable 에 대한 접근 권한이 부족할 수 있음. e.g. private 변수에 대한 접근
 
 ## Examples
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 
+---
 [1] https://refactoring.guru/design-patterns/visitor-double-dispatch
