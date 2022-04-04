@@ -1,5 +1,5 @@
 class Box(override val name: String): Component {
-    private val children = mutableListOf<Box>()
+    val children = mutableListOf<Box>()
 
     fun add(composite: Box) {
         this.children.add(composite)
