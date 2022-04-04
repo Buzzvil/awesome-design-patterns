@@ -1,11 +1,9 @@
-class Box(override val name: String): Component {
-    val children = mutableListOf<Box>()
+class Box(): Component {
+    val children = mutableListOf<Component>()
 
-    fun add(composite: Box) {
-        this.children.add(composite)
+    fun add(component: Component) {
+        this.children.add(component)
     }
-
-    override fun isLeaf() = this.children.isEmpty()
 
     override fun execute(): Int = this.children.fold(0) { acc, next -> acc + next.execute() }
 }
