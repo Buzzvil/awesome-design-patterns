@@ -1,5 +1,5 @@
 class Box(): Component {
-    val children = mutableListOf<Component>()
+    private val children = mutableListOf<Component>()
 
     fun add(component: Component) {
         this.children.add(component)
