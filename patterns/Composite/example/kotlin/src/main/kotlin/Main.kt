@@ -29,9 +29,10 @@ fun main(args: Array<String>) {
     // all products price: 100 + 200 + 300 + 400 + 500 = 1500
     println(rootBox.getTotalPrice())
 
-    // phone price: 500, headphones price: 400
-    // phoneAndHeadphonesBox price: 500 + 400 = 900
+    // phone price: 500
     println(phone.getTotalPrice())
+    // headphones price: 400
     println(headphones.getTotalPrice())
+    // phoneAndHeadphonesBox price: 500 + 400 = 900
     println(phoneAndHeadphonesBox.getTotalPrice())
 }
