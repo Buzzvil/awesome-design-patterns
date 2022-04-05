@@ -1,3 +1,3 @@
 interface Component {
-    fun execute(): Int
+    fun getTotalPrice(): Int
 }
