@@ -75,29 +75,27 @@ class RemoteController(object):
     _command_history: List[Command]
 
     def __init__(self, command_up, command_down, command_left, command_right):
-        self.button_up = self.execute_command(command_up)
-        self.button_down = self.execute_command(command_down)
-        self.button_left = self.execute_command(command_left)
-        self.button_right = self.execute_command(command_right)
+        self.button_up = command_up
+        self.button_down = command_down
+        self.button_left = command_left
+        self.button_right = command_right
         self._command_history = []
 
     def execute_command(self, command):
-        def func():
-            command.execute()
-            self._command_history.append(command)
-        return func
+        command.execute()
+        self._command_history.append(command)
 
     def button_up_clicked(self):
-        self.button_up()
+        self.execute_command(self.button_up)
 
     def button_down_clicked(self):
-        self.button_down()
+        self.execute_command(self.button_down)
 
     def button_left_clicked(self):
-        self.button_left()
+        self.execute_command(self.button_left)
 
     def button_right_clicked(self):
-        self.button_right()
+        self.execute_command(self.button_right)
 
     def print_history(self):
         print('[' + ', '.join(command.info() for command in self._command_history) + ']')
