@@ -23,24 +23,25 @@ classDiagram
     class Client{
     }
     class Receiver{
-      operation((a, b, c)
+      +operation((a, b, c)
     }
     class Command{
-      execute()
+      <<interface>>
+      +execute()
     }
     class ConcreteCommand1{
-      receiver
-      params
-      Command1(receiver, params)
-      execute()
+      -receiver
+      -params
+      -ConcreteCommand1(receiver, params)
+      +execute()
     }
     class ConcreteCommand2{
-      execute()
+      +execute()
     }
     class Invoker{
-      command
-      setCommand(command)
-      executeCommand()
+      -command
+      +setCommand(command)
+      -executeCommand()
     }
     Invoker <-- Client
     Receiver <-- Client
@@ -48,7 +49,7 @@ classDiagram
     Command <|-- ConcreteCommand1
     Receiver <-- ConcreteCommand1
     Command <|-- ConcreteCommand2
-    Command <-- Invoker
+    Command <--* Invoker
 ```
 
 ## Pros & Cons
