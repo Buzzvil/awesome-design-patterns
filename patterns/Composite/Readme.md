@@ -64,5 +64,10 @@ Composite 패턴은 단순 Leaf와 복합 컨테이너라는 두 기본 타입�
 - 👍 OCP: 트리 개체에서 기존 코드를 변경하지 않고 새로운 요소 타입을 도입할 수 있다.
 - 👎 기능이 너무 다른 클래스들에 공통 인터페이스를 제공하는 것이 어려울 수 있다. 특정 시나리오에서는, 구성 요소 인터페이스를 과도하게 일반화하여 이해하기 어렵게 만든다.
 
+## Example
+![Kotlin](https://img.shields.io/badge/kotlin-%230095D5.svg?style=for-the-badge&logo=kotlin&logoColor=white)
+### Tree Price Example
+- [Tree price](./example/kotlin/src/main/kotlin/Main.kt)
+- [Box](./example/kotlin/src/main/kotlin/Box.kt), [Component](./example/kotlin/src/main/kotlin/Component.kt), [Product](./example/kotlin/src/main/kotlin/Product.kt)
 ## Reference
 [Refactoring.guru](https://refactoring.guru/design-patterns/composite)
