@@ -3,6 +3,8 @@
 - 요청을 객체의 형태로 캡슐화하여 서로 요청이 다른 사용자의 매개변수화, 요청 저장 또는 로깅, 그리고 연산의 취소를 지원하게 만드는 패턴입니다.
 
 ## Problem
+![img](https://refactoring.guru/images/patterns/diagrams/command/problem2.png)
+![img](https://refactoring.guru/images/patterns/diagrams/command/problem3-en.png)
 - 복사, 붙여넣기 등 여러 기능이 있는 텍스트 에디터를 만들려고 합니다.
 - 이 에디터에는 각 기능에 대응하는 버튼이 있어야 합니다.
 - 각 기능에 대응하고, 버튼 클래스를 상속받는 서브클래스들을 선언합니다. (CopyButton, PasteButton, CutButton, ...) 
@@ -12,6 +14,8 @@
 - GUI의 인터페이스가 비즈니스로직을 직접 호출하게 됩니다.
 
 ## Solution
+![img](https://refactoring.guru/images/patterns/diagrams/command/solution2-en.png)
+![img](https://refactoring.guru/images/patterns/diagrams/command/solution3-en.png)
 - 각 기능을 커맨드 클래스의 서브클래스로 구현합니다.
 - Shortcut, MenuItem, Button 모두 커맨드 클래스를 담는 필드를 갖게 되고, 커맨드 클래스의 인터페이스(execute method)만 의존하게 됩니다.
 - GUI 인터페이스들은 커맨드를 트리거 할 뿐, 비즈니스 로직을 몰라도 됩니다.
