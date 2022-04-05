@@ -19,10 +19,10 @@ class Receiver(ABC):
 
 class LightReceiver(Receiver):
     def turn_on(self):
-        print("Light turn on. It's bright here")
+        print("Light turn on. It's bright here.")
 
     def turn_off(self):
-        print("Light turn off. It's dark here")
+        print("Light turn off. It's dark here.")
 
     def info(self):
         return "LightReceiver"
@@ -113,9 +113,9 @@ if __name__ == "__main__":
     )
 
     remote_controller.button_up_clicked()
-    # Light turn on. It's bright here
+    # Light turn on. It's bright here.
     remote_controller.button_down_clicked()
-    # Light turn off. It's dark here
+    # Light turn off. It's dark here.
     remote_controller.button_left_clicked()
     # Heater turn off. It's getting cold here.
     remote_controller.button_right_clicked()
