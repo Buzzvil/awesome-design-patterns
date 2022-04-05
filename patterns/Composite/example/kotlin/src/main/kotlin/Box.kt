@@ -5,5 +5,8 @@ class Box: Component {
         this.children.add(component)
     }
 
-    override fun getTotalPrice(): Int = this.children.fold(0) { acc, next -> acc + next.getTotalPrice() }
+    fun remove(component: Component): Boolean = this.children.remove(component)
+
+    override fun getTotalPrice(): Int = this
+        .children.fold(0) { acc, next -> acc + next.getTotalPrice() }
 }
