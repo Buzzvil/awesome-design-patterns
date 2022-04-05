@@ -18,7 +18,7 @@
 ## Solution
 ![image](https://refactoring.guru/images/patterns/diagrams/mediator/solution1-en-2x.png)
 
-- 위의 예제에서, Dialog 객체를 도입하여 Dialog 객체가 모든 상호작용을 담당하도록 해봅시다. Dialog 객체는 모든 하위 요소를 알고 있으므로 새로운 종속성을 도입할 필요가 없습니다.
+- 위의 예제에서, Dialog 객체가 모든 상호작용을 담당하도록 해봅시다. Dialog 객체는 모든 하위 요소를 알고 있으므로 새로운 종속성을 도입할 필요가 없습니다.
 
 - 제출 버튼을 살펴봅시다. 이전에는 사용자가 버튼을 클릭할 떄마다 모든 개별 요소의 값을 검증해야 했습니다. 하지만 이제는 클릭이 발생했다고 Dialog 객체에 알리기만 하면 됩니다. Dialog 객체는 유효성 검사를 수행하거나 개별 요소에 작업을 전달합니다. 따라서 제출 버튼은 다른 요소들에 묶이지 않고 Dialog에만 종속됩니다.
 
@@ -27,7 +27,7 @@
 
 
 ## Structure
-![image](https://refactoring.guru/images/patterns/diagrams/mediator/structure-indexed-2x.png)
+![image](https://refactoring.guru/images/patterns/diagrams/mediator/structure-2x.png)
 
 
 ## Pros & Cons
