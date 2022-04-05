@@ -74,11 +74,11 @@ class TurnOffCommand(Command):
 class RemoteController(object):
     _command_history: List[Command]
 
-    def __init__(self, light_turn_on, light_turn_off, heater_turn_on, heater_turn_off):
-        self.light_turn_on = self.execute_command(light_turn_on)
-        self.light_turn_off = self.execute_command(light_turn_off)
-        self.heater_turn_on = self.execute_command(heater_turn_on)
-        self.heater_turn_off = self.execute_command(heater_turn_off)
+    def __init__(self, command_up, command_down, command_left, command_right):
+        self.button_up = self.execute_command(command_up)
+        self.button_down = self.execute_command(command_down)
+        self.button_left = self.execute_command(command_left)
+        self.button_right = self.execute_command(command_right)
         self._command_history = []
 
     def execute_command(self, command):
@@ -87,17 +87,17 @@ class RemoteController(object):
             self._command_history.append(command)
         return func
 
-    def light_on(self):
-        self.light_turn_on()
+    def button_up_clicked(self):
+        self.button_up()
 
-    def light_off(self):
-        self.light_turn_off()
+    def button_down_clicked(self):
+        self.button_down()
 
-    def heater_on(self):
-        self.heater_turn_on()
+    def button_left_clicked(self):
+        self.button_left()
 
-    def heater_off(self):
-        self.heater_turn_off()
+    def button_right_clicked(self):
+        self.button_right()
 
     def print_history(self):
         print('[' + ', '.join(command.info() for command in self._command_history) + ']')
@@ -106,14 +106,21 @@ class RemoteController(object):
 if __name__ == "__main__":
     light_receiver = LightReceiver()
     heater_receiver = HeaterReceiver()
+
     remote_controller = RemoteController(
-        light_turn_on=TurnOnCommand(light_receiver),
-        light_turn_off=TurnOffCommand(light_receiver),
-        heater_turn_on=TurnOffCommand(heater_receiver),
-        heater_turn_off=TurnOffCommand(heater_receiver),
+        command_up=TurnOnCommand(light_receiver),
+        command_down=TurnOffCommand(light_receiver),
+        command_left=TurnOffCommand(heater_receiver),
+        command_right=TurnOffCommand(heater_receiver),
     )
-    remote_controller.light_on()
-    remote_controller.light_off()
-    remote_controller.heater_on()
-    remote_controller.heater_off()
+
+    remote_controller.button_up_clicked()
+    # Light turn on. It's bright here
+    remote_controller.button_down_clicked()
+    # Light turn off. It's dark here
+    remote_controller.button_left_clicked()
+    # Heater turn off. It's getting cold here.
+    remote_controller.button_right_clicked()
+    # Heater turn off. It's getting cold here.
     remote_controller.print_history()
+    # [LightReceiver turn on, LightReceiver turn off, HeaterReceiver turn off, HeaterReceiver turn off]
