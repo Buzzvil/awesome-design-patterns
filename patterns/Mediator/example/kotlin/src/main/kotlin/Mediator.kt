@@ -1,3 +1,3 @@
 interface Mediator {
-    fun notify(sender: String): Unit
+    fun notify(sender: Sender, event: Event)
 }

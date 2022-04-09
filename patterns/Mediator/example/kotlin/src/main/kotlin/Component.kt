@@ -1,1 +1,4 @@
-class Component(name: String, mediator: Mediator)
+interface Component {
+    val sender: Sender
+    val mediator: Mediator
+}
