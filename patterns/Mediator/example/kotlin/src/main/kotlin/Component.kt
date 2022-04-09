@@ -1,0 +1,1 @@
+class Component(name: String, mediator: Mediator)
