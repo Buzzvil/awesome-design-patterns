@@ -3,6 +3,7 @@ class ControlTower: Mediator {
         when (event) {
             Event.LANDING -> sender.dontDoThat(event)
             Event.PASS_THROUGH -> sender.doIt(event)
+            Event.TAKEOFF -> sender.doIt(event)
         }
     }
 }
