@@ -1,5 +1,5 @@
-class Helicopter(override val mediator: Mediator, override val sender: Sender=Sender.HELICOPTER): Component {
+class Helicopter(override val mediator: Mediator): Component {
     fun notifyPassthrough(){
-        this.mediator.notify(this.sender, Event.PASS_THROUGH)
+        this.mediator.notify(sender=this, event=Event.PASS_THROUGH)
     }
 }

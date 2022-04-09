@@ -1,5 +1,5 @@
 class ControlTower: Mediator {
-    override fun notify(sender: Sender, event: Event) {
+    override fun notify(sender: Component, event: Event) {
         print(sender)
     }
 }

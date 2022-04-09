@@ -1,5 +1,5 @@
-class Glider(override val mediator: Mediator, override val sender: Sender=Sender.GLIDER): Component {
+class Glider(override val mediator: Mediator): Component {
     fun notifyTakeOff(){
-        this.mediator.notify(this.sender, Event.TAKE_OFF)
+        this.mediator.notify(sender=this, event=Event.TAKE_OFF)
     }
 }

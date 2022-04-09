@@ -1,3 +1,3 @@
 interface Mediator {
-    fun notify(sender: Sender, event: Event)
+    fun notify(sender: Component, event: Event)
 }
