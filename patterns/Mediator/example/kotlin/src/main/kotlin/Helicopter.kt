@@ -5,13 +5,13 @@ class Helicopter(override val mediator: Mediator): Component {
 
     override fun doIt(event: Event) {
         if (event == Event.PASS_THROUGH) {
-            print("passing through")
+            println("helicopter: passing through")
         }
     }
 
     override fun dontDoThat(event: Event) {
         if (event == Event.PASS_THROUGH) {
-            print("turning around")
+            println("helicopter: turning around")
         }
     }
 }

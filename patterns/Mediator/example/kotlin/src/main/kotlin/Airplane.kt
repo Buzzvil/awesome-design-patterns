@@ -5,13 +5,13 @@ class Airplane(override val mediator: Mediator): Component {
 
     override fun doIt(event: Event) {
         if (event == Event.LANDING) {
-            print("landing")
+            println("airplane: landing")
         }
     }
 
     override fun dontDoThat(event: Event) {
         if (event == Event.LANDING) {
-            print("waiting for landing")
+            println("airplane: waiting for landing")
         }
     }
 }

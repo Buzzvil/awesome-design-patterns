@@ -1,7 +1,11 @@
 fun main(args: Array<String>) {
-    println("Hello World!")
+    val mediator = ControlTower()
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+    val glider = Glider(mediator)
+    val helicopter = Helicopter(mediator)
+    val airplane = Airplane(mediator)
+
+    glider.notifyTakeOff()
+    helicopter.notifyPassthrough()
+    airplane.notifyLanding()
 }
