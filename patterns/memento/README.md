@@ -76,24 +76,28 @@ class Editor {
     }
 
     fun createSnapshot(): Snapshot {
-        return Snapshot(this, text, curX, curY, selectionWidth)
+        return Snapshot(text, curX, curY, selectionWidth)
+    }
+
+    fun restore(snapshot: Snapshot?) {
+        snapshot?.restore(this)
     }
 
     fun printCurrentState() {
         println("text: $text\ncursor: $curX, $curY\nselectionWidth: $selectionWidth")
     }
 
-     inner class Snapshot(
-        private val editor: Editor,
+    inner class Snapshot(
         private val text: String,
         private val curX: Int,
         private val curY: Int,
         private val selectionWidth: Int
     ) {
-        fun restore() {
+        // internal: 같은 모듈안에서만 공개됨
+        internal fun restore(editor: Editor) {
             editor.setText(text)
             editor.setCursor(curX, curY)
-            editor.selectionWidth = selectionWidth
+            editor.setSelectionWidth(selectionWidth)
         }
     }
 }
@@ -106,7 +110,9 @@ class Command(private val editor: Editor) {
     }
 
     fun undo() {
-        backup?.restore()
+        editor.restore(backup)
+        // 아래와 같이 사용해도 동일한 결과
+        // backup?.restore(editor)
     }
 }
 ```
