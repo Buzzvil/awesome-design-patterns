@@ -10,9 +10,9 @@ Chain of Responsibility 는 핸들러 체인을 따라 요청을 전달할 수 �
 
 ``` mermaid
 graph LR
-    A[Request] --> B((Authentication + Authorization))
-    B -->|Yes| C[Ordering System]
-    B -->|No| D(fa:fa-ban)
+    A(Request) --> B((Authentication + Authorization))
+    B -->|Yes| C(Ordering System)
+    B -->|No| D(X)
 ```
 
 주문 시스템에서 요청을 처리하기 전에 검증/인증 과정을 반드시 통과해야 한다.
@@ -25,9 +25,9 @@ graph LR
 
 ``` mermaid
 graph LR;
-    A[Request] --> B((Authentication + Authorization + Validation + Caching + ...))
-    B -->|Yes| C[Ordering System]
-    B -->|No| D(fa:fa-ban)
+    A(Request) --> B((Authentication + Authorization + Validation + Caching + ...))
+    B -->|Yes| C(Ordering System)
+    B -->|No| D(X)
 ```
 
 이미 뒤죽박죽 꼬인 검사 코드는 새로운 기능을 추가할 때 마다 점점 더 부풀려졌다. 하나의 검사를 변경하면 때때로 다른 검사에 영향을 준다. 최악의 경우 시스템의 다른 구성 요소를 보호하기 위해 검사를 재사용하려고 할 때, 해당 코드 일부가 필요하지만 전부는 아니기 때문에 코드를 일부만 복제해야 했다.  
