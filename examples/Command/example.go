@@ -17,7 +17,7 @@ Receiver
 
 type Invoker interface {
 	setCommand(Command)
-	exectueCommand()
+	executeCommand()
 }
 
 type Slack struct {
@@ -32,10 +32,15 @@ type DirectExecute struct {
 
 type Command interface {
 	execute()
+	name() string
 }
 
 type CommandBase struct {
 	name string
+}
+
+func (c CommandBase) getName() string {
+	return c.name
 }
 
 type CheckCommand struct {
@@ -60,12 +65,12 @@ func newSlack(cmd Command) Slack {
 }
 
 func (s Slack) setCommand(cmd Command) {
-	fmt.Printf("Setting Slack command as %s", cmd.name)
+	fmt.Printf("Setting Slack command as %s", cmd.name())
 	s.cmd = cmd
 }
 
-func (s Slack) exectueCommand() {
-	fmt.Printf("Executing Slack command %s", s.cmd.name)
+func (s Slack) executeCommand() {
+	fmt.Printf("Executing Slack command %s", s.cmd.name())
 	s.cmd.execute()
 }
 
@@ -74,21 +79,21 @@ func newDirectExecute(cmd Command) DirectExecute {
 }
 
 func (d DirectExecute) setCommand(cmd Command) {
-	fmt.Printf("Setting DirectExecute command as %s", cmd.name)
+	fmt.Printf("Setting DirectExecute command as %s", cmd.name())
 	d.cmd = cmd
 }
 
-func (d DirectExecute) exectueCommand() {
-	fmt.Printf("Executing DirectExecute command %s", d.cmd.name)
+func (d DirectExecute) executeCommand() {
+	fmt.Printf("Executing DirectExecute command %s", d.cmd.name())
 	d.cmd.execute()
 }
 
 func newCheckCommand(receiver Receiver) CheckCommand {
-	return CheckCommand{receiver: receiver, name: "CheckCommand"}
+	return CheckCommand{CommandBase{name: "CheckCommand"}, receiver}
 }
 
 func newCheckoutCommand(receiver Receiver, target string, user string) CheckoutCommand {
-	return CheckoutCommand{receiver: receiver, target: target, user: user, name: "CheckoutCommand"}
+	return CheckoutCommand{CommandBase{name: "CheckoutCommand"}, receiver, target, user}
 }
 
 func (c CheckCommand) execute() {
@@ -98,10 +103,18 @@ func (c CheckCommand) execute() {
 	}
 }
 
+func (c CheckCommand) name() string {
+	return c.getName()
+}
+
 func (c CheckoutCommand) execute() {
 	s := c.receiver.status
 	s[c.target] = c.user
 	fmt.Printf("%s occupied %s!", c.user, c.target)
+}
+
+func (c CheckoutCommand) name() string {
+	return c.getName()
 }
 
 func newAllocationService() Receiver {

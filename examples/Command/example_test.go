@@ -3,48 +3,48 @@ package command
 import "testing"
 
 func TestSlackCommand(t *testing.T) {
-	services := {newAllocationSernewAllocationService(), newBugnewBudgetThrottlingService()}
+	services := []Receiver{newAllocationService(), newBudgetThrottlingService()}
 	target := "dev"
 	user := "nathan.yang"
 
-	for service := range services {
-		cmd := newCheckCommand(service)
-		invoker := newSlack(cmd)
+	for _, service := range services {
+		checkCmd := newCheckCommand(service)
+		invoker := newSlack(checkCmd)
 
-		invoker.exectueCommand()
-		if (service.status[target] != "") {
+		invoker.executeCommand()
+		if service.status[target] != "" {
 			t.Fail()
 		}
 
-		cmd = newCheckoutCommand(service, target, user)
-		checkoutInvoker := newSlack(cmd)
-		invoker.executeCommand()
+		checkoutCmd := newCheckoutCommand(service, target, user)
+		checkoutInvoker := newSlack(checkoutCmd)
+		checkoutInvoker.executeCommand()
 
-		if (service.status[target] != user) {
+		if service.status[target] != user {
 			t.Fail()
 		}
 	}
 }
 
 func TestDirectExecuteCommand(t *testing.T) {
-	services := {newAllocationSernewAllocationService(), newBugnewBudgetThrottlingService()}
+	services := []Receiver{newAllocationService(), newBudgetThrottlingService()}
 	target := "dev"
 	user := "nathan.yang"
 
-	for service := range services {
-		cmd := newCheckCommand(service)
-		invoker := newDirectExecute(cmd)
+	for _, service := range services {
+		checkCmd := newCheckCommand(service)
+		invoker := newDirectExecute(checkCmd)
 
-		invoker.exectueCommand()
-		if (service.status[target] != "") {
+		invoker.executeCommand()
+		if service.status[target] != "" {
 			t.Fail()
 		}
 
-		cmd = newCheckoutCommand(service, target, user)
-		checkoutInvoker := newDirectExecute(cmd)
-		invoker.executeCommand()
+		checkoutCmd := newCheckoutCommand(service, target, user)
+		checkoutInvoker := newDirectExecute(checkoutCmd)
+		checkoutInvoker.executeCommand()
 
-		if (service.status[target] != user) {
+		if service.status[target] != user {
 			t.Fail()
 		}
 	}
