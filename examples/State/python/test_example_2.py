@@ -1,6 +1,6 @@
 import pytest
 
-from examples.State.python.example import Editor, InsertMode, NormalMode, VisualMode
+from examples.State.python.example_2 import Editor, InsertMode, NormalMode, VisualMode
 
 
 @pytest.mark.parametrize(
