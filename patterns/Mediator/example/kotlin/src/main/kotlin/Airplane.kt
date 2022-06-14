@@ -15,3 +15,4 @@ class Airplane(override val mediator: Mediator): Component {
         }
     }
 }
+
